@@ -14,7 +14,7 @@
 		"en": "Borders to seperate components",
 		"fr": "Ajout de bordure sur des éléments"
 	},
-	"modified": "2023-07-06",
+	"modified": "2023-10-25",
 	"componentName": "borders",
 	"status": "stable",
 	"pages": {

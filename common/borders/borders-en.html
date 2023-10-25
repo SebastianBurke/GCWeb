@@ -1,77 +1,92 @@
 ---
 {
-	"title": "Borders",
-	"language": "en",
-	"altLangPage": "borders-fr.html",
-	"breadcrumbs":
-	[
-		{
-			"title": "GCWeb home",
-			"link": "https://wet-boew.github.io/themes-dist/GCWeb/index-en.html"
-		}
-	],
-	"secondlevel": false,
-	"dateModified": "2023-06-20",
-	"share": "true"
+"title": "Borders",
+"language": "en",
+"altLangPage": "borders-fr.html",
+"breadcrumbs":
+[
+{
+"title": "GCWeb home",
+"link": "https://wet-boew.github.io/themes-dist/GCWeb/index-en.html"
+}
+],
+"secondlevel": false,
+"dateModified": "2023-10-25",
+"share": "true"
 }
 ---
 
-<h3>CSS Class</h3>
+<h2>CSS Class</h2>
 <dl class="dl-horizontal">
 	<dt><code>.brdr-left</code></dt>
-	<dd>Set a border to the left of the element</dd>
-	<dt><code>.brdr-tp</code></dt>
-	<dd>Set a border on top of the element</dd>
+	<dd>Sets a border to the left of the element</dd>
 	<dt><code>.brdr-rght</code></dt>
-	<dd>Set a border to the right of the element</dd>
+	<dd>Sets a border to the right of the element</dd>
 	<dt><code>.brdr-bttm</code></dt>
-	<dd>Set a border below the element</dd>
+	<dd>Sets a border below the element</dd>
+	<dt><code>.brdr-tp</code></dt>
+	<dd>Sets a border on top of the element</dd>
 	<dt><code>.brdr-0</code></dt>
-	<dd>Remove borders</dd>
-	<dt><code>.brdr-rds</code></dt>
-	<dd>Remove border radius</dd>
+	<dd>Removes borders</dd>
+	<dt><code>.brdr-rds-0</code></dt>
+	<dd>Removes border radius</dd>
+	<dt><code>.well</code></dt>
+	<dd>Sets contents in a bordered box with default values (can be used with .brdr-0 and .brdr-rds-0)</dd>
 </dl>
 <div class="row">
 	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h3 class="mrgn-tp-0">Appearance</h3>
-				<p class="brdr-lft">
-					Example 1
-				</p>
-				<p class="brdr-tp">
-					Example 2
-				</p>
-				<p class="brdr-rght">
-					Example 3
-				</p>
-				<p class="brdr-bttm">
-					Example 4
-				</p>
-				<p class="brdr-0">
-					Example 5
-				</p>
-				<p class="brdr-rds-0">
-					Example 6
-				</p>
-			</div>
+		<h2>Appearance</h2>
+		<div class="custom-block">
+			<p class="mrgn-bttm-10 brdr-tp brdr-lft">
+				Left and top border
+			</p>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h3 class="mrgn-tp-0">Code</h3>
-				<pre><code>// Example 1:
-&lt;p <strong>class="brdr-lft"</strong>&gt;...&lt;/p&gt;</code></pre>
-				<pre><code>// Example 2:
-&lt;p <strong>class="brdr-tp"</strong>&gt;...&lt;/p&gt;</code></pre>
-				<pre><code>// Example 3:
-&lt;p <strong>class="brdr-rght"</strong>&gt;...&lt;/p&gt;</code></pre>
-				<pre><code>// Example 4:
-&lt;p <strong>class="brdr-bttm"</strong>&gt;...&lt;/p&gt;</code></pre>
-				<pre><code>// Example 5:
-&lt;p <strong>class="brdr-0"</strong>&gt;...&lt;/p&gt;</code></pre>
-				<pre><code>// Example 6:
-&lt;p <strong>class="brdr-rds-0"</strong>&gt;...&lt;/p&gt;</code></pre>
-			</div>
+		<br>
+		<br>
+		<div class="custom-block">
+			<p class="mrgn-bttm-10 brdr-bttm brdr-rght" style="text-align: right">
+				Right and bottom border
+			</p>
+		</div>
+		<br>
+		<div class="custom-block">
+			<p class="mrgn-bttm-30 brdr-bttm brdr-lft brdr-0">
+				No borders
+			</p>
+		</div>
+		<br>
+		<div class="custom-block">
+			<p class="well">
+				Well with default values
+			</p>
+		</div>
+		<div class="custom-block">
+			<p class="well brdr-0 brdr-rds-0">
+				Borderless well with no border radius
+			</p>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<h2>Code</h2>
+		<div class="custom-block">
+			<pre><code>// Left and top border
+			&lt;p <strong>class="brdr-lft brdr-tp"</strong>&gt;...&lt;/p&gt;</code></pre>
+		</div>
+		<div class="custom-block">
+			<pre><code>// Right and bottom border
+			&lt;p <strong>class="brdr-rght brdr-bttm"</strong>&gt;...&lt;/p&gt;</code></pre>
+		</div>
+		<div class="custom-block">
+			<pre><code>// No borders
+			&lt;p <strong>class="brdr-bttm brdr-lft brdr-0"</strong>&gt;...&lt;/p&gt;</code></pre>
+		</div>
+		<div class="custom-block">
+			<pre><code>// Well with default values
+			&lt;p <strong>class="well"</strong>&gt;...&lt;/p&gt;</code></pre>
+		</div>
+		<div class="custom-block">
+			<pre><code>// Borderless well with no border radius
+			&lt;p <strong>class="well brdr-0 brdr-rds-0"</strong>&gt;...&lt;/p&gt;</code></pre>
 		</div>
 	</div>
 </div>
