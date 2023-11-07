@@ -11,10 +11,10 @@
 		"fr": "Cases à cocher et boutons radio"
 	},
 	"description": {
-		"en": "Checkboxes and radio buttons designed based on user experience testing",
-		"fr": "Cases à cocher et boutons radio conçu d'après des recherches d'expérience utilisateur"
+		"en": "Display check boxes and radio buttons that are bigger than natively provided by browsers and in-line with the Canada.ca design system.",
+		"fr": "Affiche des cases à cocher et boutons radio plus grand que ce qui est nativement offert par les navigateurs et qui est conforme avec les configurations de conception de Canada.ca."
 	},
-	"modified": "2021-05-07",
+	"modified": "2023-09-06",
 	"componentName": "gc-chckbxrdio",
 	"status": "stable",
 	"pages": {
@@ -52,6 +52,40 @@
 				"title": "Checkboxes and radio buttons: Canada.ca design system",
 				"language": "en",
 				"url": "https://design.canada.ca/common-design-patterns/checkboxes-radio-buttons.html"
+			}
+		]
+	}
+}
+,{
+	"@context": {
+		"@version": 1.1,
+		"dct": "http://purl.org/dc/terms/",
+		"title": { "@id": "dct:title", "@container": "@language" },
+		"description": { "@id": "dct:description", "@container": "@language" },
+		"modified": "dct:modified"
+	},
+	"title": {
+		"en": "Download link",
+		"fr": "Lien de téléchargement"
+	},
+	"description": {
+		"en": "Download link with custom styles.",
+		"fr": "Lien de téléchargement avec des styles personalisés."
+	},
+	"modified": "2023-04-20",
+	"componentName": "gc-dwnld",
+	"status": "stable",
+	"pages": {
+		"examples": [
+			{
+				"title": "Download link",
+				"language": "en",
+				"path": "download_link-en.html"
+			},
+			{
+				"title": "Lien de téléchargement",
+				"language": "fr",
+				"path": "download_link-fr.html"
 			}
 		]
 	}
@@ -103,10 +137,10 @@
 		"fr": "Promotions contextuelles"
 	},
 	"description": {
-		"en": "Context-specific features",
-		"fr": "Promotions contextuelles"
+		"en": "In-page components used to promote government activities, initiatives, programs and services.",
+		"fr": "Des composantes d’intérieur de page servant à promouvoir des activités, des initiatives, des programmes et des services pangouvernementaux."
 	},
-	"modified": "2022-10-21",
+	"modified": "2023-09-05",
 	"componentName": "gc-features",
 	"status": "stable",
 	"pages": {
@@ -132,6 +166,18 @@
 				"title": "Promotions contextuelles - Exemples pratiques",
 				"language": "fr",
 				"path": "gc-features-fr.html"
+			}
+		],
+		"reports": [
+			{
+				"title": "Accessibility assessment #1 - Context-specific features",
+				"language": "en",
+				"path": "reports/a11y-1-en.html"
+			},
+			{
+				"title": "Assessment d'accessibilité #1 - Promotions contextuelles",
+				"language": "fr",
+				"path": "reports/a11y-1-fr.html"
 			}
 		]
 	}
@@ -217,10 +263,10 @@
 		"fr": "Services et information"
 	},
 	"description": {
-		"en": "Services and information",
-		"fr": "Services et information"
+		"en": "Used to present sets of links with accompanying descriptions.",
+		"fr": "Utilisé pour présenter des ensembles de liens accompagnés de descriptions."
 	},
-	"modified": "2021-07-02",
+	"modified": "2023-09-06",
 	"componentName": "gc-servinfo",
 	"status": "stable",
 	"pages": {
@@ -259,14 +305,72 @@
 		"modified": "dct:modified"
 	},
 	"title": {
-		"en": "Subway map menu",
-		"fr": "Menu par carte de métro"
+		"en": "Step by Step navigation",
+		"fr": "Navigation étape par étape"
 	},
 	"description": {
+		"en": "Step by Step navigation designed based on user experience testing",
+		"fr": "Navigation étape par étape conçu d'après des recherches d'expérience utilisateur"
+	},
+	"modified": "2023-06-28",
+	"componentName": "gc-stp-stp",
+	"status": "stable",
+	"pages": {
+		"docs": [
+			{
+				"title": "Step by Step navigation",
+				"language": "en",
+				"path": "gc-stp-stp-doc-en.html"
+			},
+			{
+				"title": "Navigation étape par étape",
+				"language": "fr",
+				"path": "gc-stp-stp-doc-fr.html"
+			}
+		],
+		"examples": [
+			{
+				"title": "Step by Step navigation",
+				"language": "en",
+				"path": "gc-stp-stp-en.html"
+			},
+			{
+				"title": "Navigation étape par étape",
+				"language": "fr",
+				"path": "gc-stp-stp-fr.html"
+			}
+		],
+		"spec": [
+			{
+				"title": "Navigation étape par étape : Système de conception de Canada.ca",
+				"language": "fr",
+				"url": "https://conception.canada.ca/modeles-recommandes/pages-lancement-service.html"
+			},
+			{
+				"title": "Step by Step navigation: Canada.ca design system",
+				"language": "en",
+				"url": "https://design.canada.ca/recommended-templates/service-initiation-pages.html"
+			}
+		]
+	}
+}
+,{
+	"@context": {
+		"@version": 1.1,
+		"dct": "http://purl.org/dc/terms/",
+		"title": { "@id": "dct:title", "@container": "@language" },
+		"description": { "@id": "dct:description", "@container": "@language" },
+		"modified": "dct:modified"
+	},
+	"title": {
 		"en": "GC Subway map menu",
 		"fr": "GC menu par carte de métro"
 	},
-	"modified": "2020-12-07",
+	"description": {
+		"en": "Break up long and complex content into pages that each focus on a step or specific answer people need before moving to the next step or section.",
+		"fr": "Diviser du contenu long et complexe en pages qui se concentrent chacune sur une étape ou une réponse spécifique dont les gens ont besoin avant de passer à l'étape ou à la section suivante."
+	},
+	"modified": "2023-09-26",
 	"componentName": "gc-subway",
 	"status": "provisional",
 	"todos": [
@@ -372,10 +476,10 @@
 		"fr": "Tableaux GC"
 	},
 	"description": {
-		"en": "Simple responsive gc tables",
-		"fr": "Tableau simple responsive pour le GC"
+		"en": "A simple CSS solution to turn tables into responsive cards for smaller windows.",
+		"fr": "Une solution CSS simple pour transformer les tables en cartes réactives pour des fenêtres plus petites."
 	},
-	"modified": "2020-10-16",
+	"modified": "2023-09-05",
 	"componentName": "gc-table",
 	"status": "provisional",
 	"todos": [
@@ -405,14 +509,48 @@
 		"modified": "dct:modified"
 	},
 	"title": {
+		"en": "Table of Contents",
+		"fr": "Table des matières"
+	},
+	"description": {
+		"en": "Table of Contents to navigate on same page subsections",
+		"fr": "Table des matières pour naviguer vers les sous-sections de la page"
+	},
+	"modified": "2023-06-16",
+	"componentName": "gc-toc",
+	"status": "stable",
+	"pages": {
+		"examples": [
+			{
+				"title": "In-page table of contents",
+				"language": "en",
+				"path": "toc-en.html"
+			},
+			{
+				"title": "Table des matières",
+				"language": "fr",
+				"path": "toc-fr.html"
+			}
+		]
+	}
+}
+,{
+	"@context": {
+		"@version": 1.1,
+		"dct": "http://purl.org/dc/terms/",
+		"title": { "@id": "dct:title", "@container": "@language" },
+		"description": { "@id": "dct:description", "@container": "@language" },
+		"modified": "dct:modified"
+	},
+	"title": {
 		"en": "Well header responsive",
 		"fr": "Entête well responsive"
 	},
 	"description": {
-		"en": "Context-specific features",
-		"fr": "Liste - Style additionel"
+		"en": "Support use case for promotional page header or panel section header the width of the well header is readjusted based on the view port.",
+		"fr": "Cas d'utilisation de prise en charge pour l'en-tête de page promotionnelle ou l'en-tête de section de panneau, la largeur de l'entête well responsive est réajustée en fonction de l'écran."
 	},
-	"modified": "2019-05-09",
+	"modified": "2023-09-06",
 	"componentName": "header-rwd",
 	"status": "stable",
 	"pages": {
@@ -514,6 +652,41 @@
 				"title": "Exemple de vidéo",
 				"language": "fr",
 				"path": "video-fr.html"
+			}
+		]
+	}
+}
+,{
+	"@context": {
+		"@version": 1.1,
+		"dct": "http://purl.org/dc/terms/",
+		"title": { "@id": "dct:title", "@container": "@language" },
+		"description": { "@id": "dct:description", "@container": "@language" },
+		"modified": "dct:modified"
+	},
+	"title": {
+		"en": "Labels",
+		"fr": "Étiquettes"
+	},
+	"description": {
+		"en": "Labels including all various states.",
+		"fr": "Étiquettes comprenant tous les différents états."
+	},
+	"modified": "2023-07-11",
+	"componentName": "labels",
+	"processing": "baseline",
+	"status": "stable",
+	"pages": {
+		"examples": [
+			{
+				"title": "Labels",
+				"language": "en",
+				"path": "labels-en.html"
+			},
+			{
+				"title": "Étiquettes",
+				"language": "fr",
+				"path": "labels-fr.html"
 			}
 		]
 	}
