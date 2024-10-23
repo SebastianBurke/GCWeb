@@ -29,9 +29,10 @@ Consultez le système de conception de Canada.ca pour savoir quels éléments de
 
 ## Changements récents
 
-### Version 7.0
+### Version 8.0
 
 Les modifications suivantes ont été apportées depuis la **version 4.0**&nbsp;:
+* Version 8.0: Changement de "<span lang="en">Argent et finance</span>" à "<span lang="en">Argent et finances</span>".
 * Version 7.0: Ajouté "www." à l'URL du lien "<span lang="en">Canada and the world</span>".
 * Version 6.0: Changé l'URL du lien "Vétérans et militaires".
 * Version 5.0: Changement de "<span lang="en">All Contacts</span>" à "<span lang="en">All contacts</span>" dans la version anglaise.
