@@ -30,13 +30,12 @@ jobs:
     - name: Install dependencies
       run: npm install --legacy-peer-deps
     - name: Build Demo Files (GCWeb)
-      if: contains(github.ref, 'gcweb')
       run: |
-        grunt demo --branch=${{ github.ref_name }}  # Use branch name in Grunt command
-        docker-compose up -d  # Assuming docker-compose is needed for build
+        grunt demo --branch=${{ github.ref_name }}
+        docker-compose up -d
     - name: Build Demo Files (WET-BOEW)
-      if: contains(github.ref, 'wet-boew')
       run: grunt dist
+    
 
     # Step 4: Copy built files to a temporary directory for deployment
     - name: Copy Built Files
