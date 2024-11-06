@@ -40,6 +40,11 @@ jobs:
     - name: List Files After Build
       run: ls -R
 
+    - name: Verify Permissions and List ~sites
+      run: |
+        ls -ld ./~sites
+        ls -l ./~sites
+    
     # Step 4: Copy built files to a temporary directory for deployment
     - name: Copy Built Files
       run: |
