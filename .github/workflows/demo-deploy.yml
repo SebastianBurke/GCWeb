@@ -49,8 +49,8 @@ jobs:
     - name: Copy Built Files
       run: |
         mkdir -p demo_files
-        if [ -d "./~sites" ]; then cp -R ./~sites/* demo_files/; fi
-        if [ -d "./dist" ]; then cp -R ./dist/* demo_files/; fi
+        if [ -d "./~sites" ]; then rsync -av ./~sites/ demo_files/; fi
+        if [ -d "./dist" ]; then rsync -av ./dist/* demo_files/; fi
 
     # Step 5: Deploy to gh-pages branch, including submodule update
     - name: Deploy Demo
