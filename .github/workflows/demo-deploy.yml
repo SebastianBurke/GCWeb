@@ -48,17 +48,17 @@ jobs:
       run: |
         # Check if the gh-pages branch exists and clone it, or create it if not
         if git ls-remote --exit-code --heads https://github.com/${{ github.repository_owner }}/GCWeb.git gh-pages; then
-          git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages ~/gh-pages
+        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages ~/gh-pages
         else
-          # Create an empty gh-pages branch if it doesn't exist
-          git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git ~/gh-pages
-          cd ~/gh-pages
-          git checkout --orphan gh-pages
-          git rm -rf .
-          touch .nojekyll  # To prevent GitHub Pages from trying to process files as Jekyll
-          git commit --allow-empty -m "Initialize gh-pages branch"
-          git push origin gh-pages
-          cd ..
+        # Create an empty gh-pages branch if it doesn't exist
+        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git ~/gh-pages
+        cd ~/gh-pages
+        git checkout --orphan gh-pages
+        git rm -rf .
+        touch .nojekyll  # To prevent GitHub Pages from trying to process files as Jekyll
+        git commit --allow-empty -m "Initialize gh-pages branch"
+        git push origin gh-pages
+        cd ..
         fi
 
         # Move into the gh-pages directory and update the submodule
@@ -67,20 +67,20 @@ jobs:
 
         # If the submodule doesn't exist, add it
         if [ ! -d "GCWeb" ]; then
-          git submodule add -b main https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
+        git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
         fi
 
-        # Update the submodule to the latest commit
+        # Update the submodule to the latest commit on the master branch
         cd GCWeb
-        git fetch --depth 1 origin main
-        git reset --hard origin/main
+        git fetch --depth 1 origin master
+        git reset --hard origin/master
         cd ..
 
         # Commit and push the submodule update
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
 
-    # Step 6: Deploy Updated Submodule to gh-pages
+    # Step 6: Deploy updated submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
       uses: ad-m/github-push-action@master
       with:
