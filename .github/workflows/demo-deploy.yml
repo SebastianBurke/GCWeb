@@ -65,6 +65,10 @@ jobs:
         cd ~/gh-pages
         git submodule update --init --recursive
 
+        # Set Git user identity for commits in this environment
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
         # If the submodule doesn't exist, add it
         if [ ! -d "GCWeb" ]; then
         git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
@@ -89,7 +93,6 @@ jobs:
         # Commit and push the submodule update
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
-
 
     # Step 6: Deploy updated submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
