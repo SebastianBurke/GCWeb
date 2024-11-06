@@ -98,12 +98,15 @@ jobs:
         git commit -m "Update submodule GCWeb" --allow-empty
         git pull --rebase origin gh-pages
 
-    # Step 6: Deploy Updated Submodule to gh-pages
-    - name: Dist - Deploy Submodule Updated
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ github.repository_owner }}/GCWeb
-        directory: ${{ github.workspace }}/gh-pages
-        branch: gh-pages
-        github_token: ${{ secrets.GH_PAT }}
+    # Step 6: Force Push to gh-pages Branch
+    - name: Force Push to gh-pages
+      run: |
+        cd ${{ github.workspace }}/gh-pages
+        # Pull latest changes to avoid conflicts, if any
+        git pull origin gh-pages --rebase || true  # Ignore errors if rebase fails
+        # Force push changes to gh-pages
+        git push origin gh-pages --force
+      env:
+        GH_TOKEN: ${{ secrets.GH_PAT }}
+
 
