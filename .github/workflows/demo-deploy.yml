@@ -37,6 +37,9 @@ jobs:
       run: grunt dist
     
 
+    - name: List Files After Build
+      run: ls -R
+
     # Step 4: Copy built files to a temporary directory for deployment
     - name: Copy Built Files
       run: |
