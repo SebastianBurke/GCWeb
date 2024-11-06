@@ -49,25 +49,30 @@ jobs:
     - name: Verify gh-pages Directory Contents
       run: ls -R ${{ github.workspace }}/gh-pages
 
-    # Step 5: Clone or Create the gh-pages Branch and Update Submodule
+    # Step 5: Clone or Ensure gh-pages Branch Exists and Update Submodule
     - name: Dist - Update Submodule
       run: |
         # Define the gh-pages path
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
 
-        # Check if the gh-pages branch exists and clone it, or create it if not
+        # Check if gh-pages directory exists
+        if [ ! -d "$GHPAGES_PATH/.git" ]; then
+        # Clone or initialize the gh-pages branch if not already present
         if git ls-remote --exit-code --heads https://github.com/${{ github.repository_owner }}/GCWeb.git gh-pages; then
-        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages "$GHPAGES_PATH"
+            git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages "$GHPAGES_PATH"
         else
-        # Create an empty gh-pages branch if it doesn't exist
-        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
-        cd "$GHPAGES_PATH"
-        git checkout --orphan gh-pages
-        git rm -rf .
-        touch .nojekyll  # To prevent GitHub Pages from trying to process files as Jekyll
-        git commit --allow-empty -m "Initialize gh-pages branch"
-        git push origin gh-pages
-        cd ..
+            # Create an empty gh-pages branch if it doesn't exist
+            git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
+            cd "$GHPAGES_PATH"
+            git checkout --orphan gh-pages
+            git rm -rf .
+            touch .nojekyll  # To prevent GitHub Pages from trying to process files as Jekyll
+            git commit --allow-empty -m "Initialize gh-pages branch"
+            git push origin gh-pages
+            cd ..
+        fi
+        else
+        echo "gh-pages directory already exists; skipping clone."
         fi
 
         # Move into the gh-pages directory and update the submodule
@@ -102,7 +107,7 @@ jobs:
         # Commit any changes and pull the latest gh-pages changes to avoid conflicts
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
-        git pull --rebase origin gh-pages
+        git pull --rebase origin gh-pages || true  # Ignore error if pull fails
 
     # Step 6: Force Push to gh-pages Branch with Authentication
     - name: Configure Remote with GitHub Token
@@ -115,8 +120,5 @@ jobs:
     - name: Force Push to gh-pages
       run: |
         cd ${{ github.workspace }}/gh-pages
-        echo "Pushing to branch gh-pages in repository https://github.com/${{ github.repository_owner }}/GCWeb.git"
-        # Pull latest changes to avoid conflicts, if any
-        git pull origin gh-pages --rebase || true  # Ignore errors if rebase fails
         # Force push changes to gh-pages
         git push origin gh-pages --force
