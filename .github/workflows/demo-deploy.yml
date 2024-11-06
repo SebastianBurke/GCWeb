@@ -49,30 +49,23 @@ jobs:
     - name: Verify gh-pages Directory Contents
       run: ls -R ${{ github.workspace }}/gh-pages
 
-    # Step 5: Clone or Ensure gh-pages Branch Exists and Update Submodule
-    - name: Dist - Update Submodule
+        # Step 5: Ensure a Clean gh-pages Directory and Update Submodule
+    - name: Dist - Prepare gh-pages Directory
       run: |
         # Define the gh-pages path
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
-
-        # Check if the gh-pages directory exists and is a Git repository
-        if [ -d "$GHPAGES_PATH/.git" ]; then
-        echo "gh-pages directory already exists and is a Git repository; skipping clone."
-        cd "$GHPAGES_PATH"
-        git pull origin gh-pages --rebase || true  # Sync with remote, ignore errors if rebase fails
-        else
-        # If the directory exists but is not a Git repo, clear it
+        
+        # Remove gh-pages directory if it exists to ensure a clean slate
         if [ -d "$GHPAGES_PATH" ]; then
-            rm -rf "$GHPAGES_PATH/*"
-        else
-            mkdir -p "$GHPAGES_PATH"
+            echo "Removing existing gh-pages directory..."
+            rm -rf "$GHPAGES_PATH"
         fi
 
         # Clone the gh-pages branch if it exists, or initialize it
         if git ls-remote --exit-code --heads https://github.com/${{ github.repository_owner }}/GCWeb.git gh-pages; then
             git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages "$GHPAGES_PATH"
         else
-            # Initialize an empty gh-pages branch
+            # Create an empty gh-pages branch if it doesn't exist
             git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
             cd "$GHPAGES_PATH"
             git checkout --orphan gh-pages
@@ -82,19 +75,18 @@ jobs:
             git push origin gh-pages
             cd ..
         fi
-        fi
 
         # Move into the gh-pages directory and update the submodule
         cd "$GHPAGES_PATH"
         git submodule update --init --recursive
 
-        # Set Git user identity for commits
+        # Set Git user identity for commits in this environment
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
         # If the submodule doesn’t exist, add it
         if [ ! -d "GCWeb" ]; then
-        git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
+            git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
         fi
 
         # Fetch and reset submodule to the latest commit on the desired branch
@@ -104,12 +96,12 @@ jobs:
 
         # Try to reset to 'master' or fallback to 'gh-pages'
         if git rev-parse --verify origin/master > /dev/null 2>&1; then
-        git reset --hard origin/master
+            git reset --hard origin/master
         elif git rev-parse --verify origin/gh-pages > /dev/null 2>&1; then
-        git reset --hard origin/gh-pages
+            git reset --hard origin/gh-pages
         else
-        echo "Neither 'master' nor 'gh-pages' branches found in the submodule repository."
-        exit 1
+            echo "Neither 'master' nor 'gh-pages' branches found in the submodule repository."
+            exit 1
         fi
         cd ..
 
@@ -117,6 +109,7 @@ jobs:
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
         git pull --rebase origin gh-pages || true  # Sync with remote, ignore rebase errors
+
 
 
     # Step 6: Force Push to gh-pages Branch with Authentication
