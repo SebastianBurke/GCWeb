@@ -70,15 +70,26 @@ jobs:
         git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
         fi
 
-        # Update the submodule to the latest commit on the master branch
+        # Ensure we have the latest refs for the submodule's repository
         cd GCWeb
-        git fetch --depth 1 origin master
+        git remote set-url origin https://github.com/ServiceCanada/wet-boew-demos.git
+        git fetch --depth 1 origin
+
+        # Try to reset to 'master'; if it doesn't exist, use 'gh-pages'
+        if git rev-parse --verify origin/master > /dev/null 2>&1; then
         git reset --hard origin/master
+        elif git rev-parse --verify origin/gh-pages > /dev/null 2>&1; then
+        git reset --hard origin/gh-pages
+        else
+        echo "Neither 'master' nor 'gh-pages' branches found in the submodule repository."
+        exit 1
+        fi
         cd ..
 
         # Commit and push the submodule update
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
+
 
     # Step 6: Deploy updated submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
