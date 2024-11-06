@@ -51,7 +51,8 @@ Left menu variables
 	background-color: #f8f8f8;
 	padding: 30px 30px 19px; }
 	.splash .sp-bx .btn {
-		box-shadow: 0 4px #ddd;
+		-webkit-box-shadow: 0 4px #ddd;
+		        box-shadow: 0 4px #ddd;
 		margin-bottom: 14px;
 		margin-top: 35px;
 		min-width: 110px; }
@@ -131,7 +132,8 @@ Left menu variables
 .error .srchbox input {
 	background-color: fff;
 	border-color: #fff currentColor #fff #fff;
-	border-image: none;
+	-o-border-image: none;
+	   border-image: none;
 	border-style: solid none solid solid;
 	border-width: 1px 0 1px 1px;
 	color: #333;
