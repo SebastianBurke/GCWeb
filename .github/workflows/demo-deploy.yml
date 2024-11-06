@@ -52,7 +52,7 @@ jobs:
         
         # Remove gh-pages directory if it exists
         if [ -d "$GHPAGES_PATH" ]; then
-          rm -rf "$GHPAGES_PATH"
+        rm -rf "$GHPAGES_PATH"
         fi
         
         # Reinitialize the gh-pages branch with a clean history
@@ -62,8 +62,15 @@ jobs:
         git rm -rf .
         touch .nojekyll
         git add .nojekyll
+
+        # Set Git user identity for commits in this environment
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+        # Commit and push to initialize the gh-pages branch
         git commit -m "Reinitialize gh-pages branch"
         git push --force origin gh-pages
+
 
     # Step 6: Force Push to gh-pages Branch with Authentication
     - name: Configure Remote with GitHub Token
