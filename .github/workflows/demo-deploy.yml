@@ -1,0 +1,46 @@
+name: Demo Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - 'gcweb-pr*'
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js with the correct version (Node.js 18 includes npm 10)
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    # Step 3: Install dependencies using --legacy-peer-deps to avoid conflicts
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    # Step 4: Build the demo files using npm
+    - name: Build Demo Files
+      run: npm run build
+
+    # Step 5: Copy built files to a temporary directory for deployment
+    - name: Copy Built Files
+      run: |
+        mkdir -p demo_files
+        cp -R dist/* demo_files/
+
+    # Step 6: Deploy to gh-pages branch
+    - name: Deploy Demo
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./demo_files
+        publish_branch: gh-pages
+        user_name: 'GitHub Actions'
+        user_email: 'actions@github.com'
