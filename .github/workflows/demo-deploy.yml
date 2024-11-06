@@ -31,19 +31,10 @@ jobs:
       run: npm install --legacy-peer-deps
     - name: Build Demo Files (GCWeb)
       run: |
-        grunt demo --branch=${{ github.ref_name }} --output=~sites
+        grunt demo --branch=${{ github.ref_name }}
         docker compose up -d
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
-    
-
-    - name: List Files After Build
-      run: ls -R
-
-    - name: Verify Permissions and List ~sites
-      run: |
-        ls -ld ./~sites
-        ls -l ./~sites
     
     # Step 4: Copy built files to a temporary directory for deployment
     - name: Copy Built Files
@@ -52,20 +43,25 @@ jobs:
         if [ -d "./~sites" ]; then rsync -av ./~sites/ demo_files/; fi
         if [ -d "./dist" ]; then rsync -av ./dist/* demo_files/; fi
 
-    # Step 5: Deploy to gh-pages branch, including submodule update
-    - name: Deploy Demo
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GH_PAT }}
-        publish_dir: ./demo_files
-        publish_branch: gh-pages
-        user_name: 'GitHub Actions'
-        user_email: 'actions@github.com'
-    
-    # Step 6: Add and commit submodule changes
-    - name: Update Submodules and .gitmodules
+    # Step 5: Clone the gh-pages branch and update submodule
+    - name: Dist - Update Submodule
       run: |
-        git submodule add -b ${{ github.ref_name }} https://github.com/ServiceCanada/wet-boew-demos.git ${{ github.ref_name }}
-        git add .gitmodules ${{ github.ref_name }}
-        git commit -m "Added submodule for ${{ github.ref_name }}"
-        git push origin gh-pages
+        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages ~/gh-pages
+        cd ~/gh-pages
+        git submodule update --init --depth 1 GCWeb
+        cd GCWeb
+        git remote add neworigin https://github.com/${{ github.repository_owner }}/GCWeb.git
+        git fetch --depth 1 neworigin GCWeb
+        git reset --hard neworigin/GCWeb
+        cd ..
+        git add .
+        git commit -m "Update submodule GCWeb" --allow-empty
+
+    # Step 6: Deploy updated submodule to gh-pages
+    - name: Dist - Deploy Submodule Updated
+      uses: ad-m/github-push-action@master
+      with:
+        repository: ${{ github.repository_owner }}/GCWeb
+        directory: ~/gh-pages
+        branch: gh-pages
+        github_token: ${{ secrets.GH_PAT }}
