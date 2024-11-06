@@ -64,10 +64,6 @@ jobs:
         cd ..
         fi
 
-        # Verify that the gh-pages directory is created
-        echo "Contents of $GHPAGES_PATH after clone or creation:"
-        ls -la "$GHPAGES_PATH"
-
         # Move into the gh-pages directory and update the submodule
         cd "$GHPAGES_PATH"
         git submodule update --init --recursive
@@ -97,16 +93,19 @@ jobs:
         fi
         cd ..
 
-        # Commit and push the submodule update
+        # Commit and prepare to push
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
+
+        # Pull the latest changes from the remote gh-pages branch with rebase to avoid conflicts
+        git pull --rebase origin gh-pages
 
     # Step 6: Deploy Updated Submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
       uses: ad-m/github-push-action@master
       with:
         repository: ${{ github.repository_owner }}/GCWeb
-        directory: ${{ github.workspace }}/gh-pages
+        directory: $GHPAGES_PATH
         branch: gh-pages
         github_token: ${{ secrets.GH_PAT }}
 
