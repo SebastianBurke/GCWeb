@@ -120,8 +120,11 @@ jobs:
         git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/GCWeb.git
 
     # Step 7: Force Push to gh-pages
-    - name: Force Push to gh-pages
+    - name: Prepare for Force Push to gh-pages
       run: |
         cd ${{ github.workspace }}/gh-pages
-        # Force push changes to gh-pages
+        # Repack the repository to avoid any potential issues with large or corrupt objects
+        git gc --prune=now
+        git repack -a -d --depth=250 --window=250
+        # Retry force push changes to gh-pages
         git push origin gh-pages --force
