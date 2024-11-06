@@ -36,12 +36,14 @@ jobs:
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
     
-    # Step 4: Copy built files to a temporary directory for deployment
-    - name: Copy Built Files
+    # Step 4: Copy built files to the gh-pages directory
+    - name: Copy Built Files to gh-pages
       run: |
-        mkdir -p demo_files
-        if [ -d "./~sites" ]; then rsync -av ./~sites/ demo_files/; fi
-        if [ -d "./dist" ]; then rsync -av ./dist/* demo_files/; fi
+        # Ensure the gh-pages directory exists
+        mkdir -p ${{ github.workspace }}/gh-pages
+        # Copy the built files to gh-pages
+        if [ -d "./~sites" ]; then rsync -av ./~sites/ ${{ github.workspace }}/gh-pages/; fi
+        if [ -d "./dist" ]; then rsync -av ./dist/* ${{ github.workspace }}/gh-pages/; fi
 
     # Step 4.5: Verify gh-pages Directory Contents
     - name: Verify gh-pages Directory Contents
