@@ -32,7 +32,7 @@ jobs:
     - name: Build Demo Files (GCWeb)
       run: |
         grunt demo --branch=${{ github.ref_name }}
-        docker-compose up -d
+        docker compose up -d
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
     
