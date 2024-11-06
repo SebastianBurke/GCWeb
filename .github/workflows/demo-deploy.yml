@@ -55,45 +55,54 @@ jobs:
         # Define the gh-pages path
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
 
-        # Check if gh-pages directory exists
-        if [ ! -d "$GHPAGES_PATH/.git" ]; then
-        # Clone or initialize the gh-pages branch if not already present
+        # Check if the gh-pages directory exists and is a Git repository
+        if [ -d "$GHPAGES_PATH/.git" ]; then
+        echo "gh-pages directory already exists and is a Git repository; skipping clone."
+        cd "$GHPAGES_PATH"
+        git pull origin gh-pages --rebase || true  # Sync with remote, ignore errors if rebase fails
+        else
+        # If the directory exists but is not a Git repo, clear it
+        if [ -d "$GHPAGES_PATH" ]; then
+            rm -rf "$GHPAGES_PATH/*"
+        else
+            mkdir -p "$GHPAGES_PATH"
+        fi
+
+        # Clone the gh-pages branch if it exists, or initialize it
         if git ls-remote --exit-code --heads https://github.com/${{ github.repository_owner }}/GCWeb.git gh-pages; then
             git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages "$GHPAGES_PATH"
         else
-            # Create an empty gh-pages branch if it doesn't exist
+            # Initialize an empty gh-pages branch
             git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
             cd "$GHPAGES_PATH"
             git checkout --orphan gh-pages
             git rm -rf .
-            touch .nojekyll  # To prevent GitHub Pages from trying to process files as Jekyll
+            touch .nojekyll  # To prevent GitHub Pages from processing files as Jekyll
             git commit --allow-empty -m "Initialize gh-pages branch"
             git push origin gh-pages
             cd ..
         fi
-        else
-        echo "gh-pages directory already exists; skipping clone."
         fi
 
         # Move into the gh-pages directory and update the submodule
         cd "$GHPAGES_PATH"
         git submodule update --init --recursive
 
-        # Set Git user identity for commits in this environment
+        # Set Git user identity for commits
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
-        # If the submodule doesn't exist, add it
+        # If the submodule doesn’t exist, add it
         if [ ! -d "GCWeb" ]; then
         git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
         fi
 
-        # Ensure we have the latest refs for the submodule's repository
+        # Fetch and reset submodule to the latest commit on the desired branch
         cd GCWeb
         git remote set-url origin https://github.com/ServiceCanada/wet-boew-demos.git
         git fetch --depth 1 origin
 
-        # Try to reset to 'master'; if it doesn't exist, use 'gh-pages'
+        # Try to reset to 'master' or fallback to 'gh-pages'
         if git rev-parse --verify origin/master > /dev/null 2>&1; then
         git reset --hard origin/master
         elif git rev-parse --verify origin/gh-pages > /dev/null 2>&1; then
@@ -104,10 +113,11 @@ jobs:
         fi
         cd ..
 
-        # Commit any changes and pull the latest gh-pages changes to avoid conflicts
+        # Commit any changes and sync the latest gh-pages changes
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
-        git pull --rebase origin gh-pages || true  # Ignore error if pull fails
+        git pull --rebase origin gh-pages || true  # Sync with remote, ignore rebase errors
+
 
     # Step 6: Force Push to gh-pages Branch with Authentication
     - name: Configure Remote with GitHub Token
