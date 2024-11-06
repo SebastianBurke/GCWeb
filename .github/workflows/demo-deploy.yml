@@ -22,27 +22,30 @@ jobs:
       with:
         node-version: '18'
 
-    # Step 3: Install dependencies using --legacy-peer-deps to avoid conflicts
+    # Step 3: Install Bower (required for wet-boew dependencies)
+    - name: Install Bower
+      run: npm install -g bower
+
+    # Step 4: Install dependencies using --legacy-peer-deps to avoid conflicts
     - name: Install dependencies
       run: npm install --legacy-peer-deps
 
-    # Step 4: Build the demo files using npm
+    # Step 5: Build the demo files using npm
     - name: Build Demo Files
       run: npm run build
 
-    # Step 5: Copy built files to a temporary directory for deployment
+    # Step 6: Copy built files to a temporary directory for deployment
     - name: Copy Built Files
       run: |
         mkdir -p demo_files
         cp -R dist/* demo_files/
 
-    # Step 6: Deploy to gh-pages branch
+    # Step 7: Deploy to gh-pages branch
     - name: Deploy Demo
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GH_PAT }}
         publish_dir: ./demo_files
         publish_branch: gh-pages
-        external_repository: SebastianBurke/GCWeb  # Specify your fork's repository
         user_name: 'GitHub Actions'
         user_email: 'actions@github.com'
