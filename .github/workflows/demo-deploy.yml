@@ -105,7 +105,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         repository: ${{ github.repository_owner }}/GCWeb
-        directory: $GHPAGES_PATH
+        directory: ${{ github.workspace }}/gh-pages
         branch: gh-pages
         github_token: ${{ secrets.GH_PAT }}
 
