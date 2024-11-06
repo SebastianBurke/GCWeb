@@ -12,35 +12,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository
+    # Step 1: Checkout the repository and initialize submodules
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: recursive  # This initializes and updates submodules automatically
 
-    # Step 2: Set up Node.js with the correct version (Node.js 18 includes npm 10)
+    # Step 2: Set up Node.js and Bower
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-
-    # Step 3: Install Bower (required for wet-boew dependencies)
     - name: Install Bower
       run: npm install -g bower
 
-    # Step 4: Install dependencies using --legacy-peer-deps to avoid conflicts
+    # Step 3: Install dependencies and build demo files
     - name: Install dependencies
       run: npm install --legacy-peer-deps
+    - name: Build Demo Files (GCWeb)
+      if: contains(github.ref, 'gcweb')
+      run: |
+        grunt demo --branch=${{ github.ref_name }}  # Use branch name in Grunt command
+        docker-compose up -d  # Assuming docker-compose is needed for build
+    - name: Build Demo Files (WET-BOEW)
+      if: contains(github.ref, 'wet-boew')
+      run: grunt dist
 
-    # Step 5: Build the demo files using npm
-    - name: Build Demo Files
-      run: npm run build
-
-    # Step 6: Copy built files to a temporary directory for deployment
+    # Step 4: Copy built files to a temporary directory for deployment
     - name: Copy Built Files
       run: |
         mkdir -p demo_files
-        cp -R dist/* demo_files/
+        if [ -d "~sites" ]; then cp -R ~sites/* demo_files/; fi
+        if [ -d "dist" ]; then cp -R dist/* demo_files/; fi
 
-    # Step 7: Deploy to gh-pages branch
+    # Step 5: Deploy to gh-pages branch, including submodule update
     - name: Deploy Demo
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -49,3 +54,11 @@ jobs:
         publish_branch: gh-pages
         user_name: 'GitHub Actions'
         user_email: 'actions@github.com'
+    
+    # Step 6: Add and commit submodule changes
+    - name: Update Submodules and .gitmodules
+      run: |
+        git submodule add -b ${{ github.ref_name }} https://github.com/ServiceCanada/wet-boew-demos.git ${{ github.ref_name }}
+        git add .gitmodules ${{ github.ref_name }}
+        git commit -m "Added submodule for ${{ github.ref_name }}"
+        git push origin gh-pages
