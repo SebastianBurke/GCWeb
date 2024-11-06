@@ -43,6 +43,10 @@ jobs:
         if [ -d "./~sites" ]; then rsync -av ./~sites/ demo_files/; fi
         if [ -d "./dist" ]; then rsync -av ./dist/* demo_files/; fi
 
+    # Step 4.5: Verify gh-pages Directory Contents
+    - name: Verify gh-pages Directory Contents
+      run: ls -R ${{ github.workspace }}/gh-pages
+
     # Step 5: Clone or Create the gh-pages Branch and Update Submodule
     - name: Dist - Update Submodule
       run: |
@@ -109,6 +113,7 @@ jobs:
     - name: Force Push to gh-pages
       run: |
         cd ${{ github.workspace }}/gh-pages
+        echo "Pushing to branch gh-pages in repository https://github.com/${{ github.repository_owner }}/GCWeb.git"
         # Pull latest changes to avoid conflicts, if any
         git pull origin gh-pages --rebase || true  # Ignore errors if rebase fails
         # Force push changes to gh-pages
