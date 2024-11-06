@@ -4,7 +4,8 @@
   "description": "Web Experience Toolkit (WET): Canada.ca Theme Reorg",
   "main": "index.html",
   "scripts": {
-    "post": "grunt"
+    "post": "grunt",
+    "build": "grunt"
   },
   "repository": {
     "type": "git",
