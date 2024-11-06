@@ -94,11 +94,11 @@ jobs:
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
 
-    # Step 6: Deploy updated submodule to gh-pages
+    # Step 6: Deploy Updated Submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
       uses: ad-m/github-push-action@master
       with:
         repository: ${{ github.repository_owner }}/GCWeb
-        directory: ~/gh-pages
+        directory: ${{ github.workspace }}/gh-pages
         branch: gh-pages
         github_token: ${{ secrets.GH_PAT }}
