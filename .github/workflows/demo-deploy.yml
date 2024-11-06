@@ -46,13 +46,16 @@ jobs:
     # Step 5: Clone or Create the gh-pages Branch and Update Submodule
     - name: Dist - Update Submodule
       run: |
+        # Define the gh-pages path
+        GHPAGES_PATH="${{ github.workspace }}/gh-pages"
+
         # Check if the gh-pages branch exists and clone it, or create it if not
         if git ls-remote --exit-code --heads https://github.com/${{ github.repository_owner }}/GCWeb.git gh-pages; then
-        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages ~/gh-pages
+        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages "$GHPAGES_PATH"
         else
         # Create an empty gh-pages branch if it doesn't exist
-        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git ~/gh-pages
-        cd ~/gh-pages
+        git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
+        cd "$GHPAGES_PATH"
         git checkout --orphan gh-pages
         git rm -rf .
         touch .nojekyll  # To prevent GitHub Pages from trying to process files as Jekyll
@@ -61,8 +64,12 @@ jobs:
         cd ..
         fi
 
+        # Verify that the gh-pages directory is created
+        echo "Contents of $GHPAGES_PATH after clone or creation:"
+        ls -la "$GHPAGES_PATH"
+
         # Move into the gh-pages directory and update the submodule
-        cd ~/gh-pages
+        cd "$GHPAGES_PATH"
         git submodule update --init --recursive
 
         # Set Git user identity for commits in this environment
@@ -94,17 +101,6 @@ jobs:
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
 
-    - name: Verify and Set gh-pages Path
-      run: |
-        if [ -d "${{ github.workspace }}/gh-pages" ]; then
-        echo "Found gh-pages at ${{ github.workspace }}/gh-pages"
-        elif [ -d "${{ github.workspace }}/GCWeb/gh-pages" ]; then
-        echo "Found gh-pages at ${{ github.workspace }}/GCWeb/gh-pages"
-        else
-        echo "gh-pages directory not found!"
-        exit 1
-        fi
-      
     # Step 6: Deploy Updated Submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
       uses: ad-m/github-push-action@master
@@ -113,3 +109,4 @@ jobs:
         directory: ${{ github.workspace }}/gh-pages
         branch: gh-pages
         github_token: ${{ secrets.GH_PAT }}
+
