@@ -94,10 +94,17 @@ jobs:
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
 
-    - name: Verify gh-pages Directory Exists
-      run: ls -R ${{ github.workspace }}
+    - name: Verify and Set gh-pages Path
+      run: |
+        if [ -d "${{ github.workspace }}/gh-pages" ]; then
+        echo "Found gh-pages at ${{ github.workspace }}/gh-pages"
+        elif [ -d "${{ github.workspace }}/GCWeb/gh-pages" ]; then
+        echo "Found gh-pages at ${{ github.workspace }}/GCWeb/gh-pages"
+        else
+        echo "gh-pages directory not found!"
+        exit 1
+        fi
       
-
     # Step 6: Deploy Updated Submodule to gh-pages
     - name: Dist - Deploy Submodule Updated
       uses: ad-m/github-push-action@master
