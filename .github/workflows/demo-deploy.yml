@@ -93,11 +93,9 @@ jobs:
         fi
         cd ..
 
-        # Commit and prepare to push
+        # Commit any changes and pull the latest gh-pages changes to avoid conflicts
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
-
-        # Pull the latest changes from the remote gh-pages branch with rebase to avoid conflicts
         git pull --rebase origin gh-pages
 
     # Step 6: Deploy Updated Submodule to gh-pages
