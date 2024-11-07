@@ -16,7 +16,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        submodules: recursive  # Initializes and updates submodules automatically
+        submodules: recursive
 
     # Step 2: Set up Node.js and Bower
     - name: Set up Node.js
@@ -37,34 +37,29 @@ jobs:
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
     
-    # Step 4: Copy built files directly to the root of the gh-pages directory
+    # Step 4: Copy built files to gh-pages directory root
     - name: Copy Built Files to gh-pages Root
       run: |
-        # Ensure the gh-pages directory exists
         mkdir -p ${{ github.workspace }}/gh-pages
         
-        # Copy the contents of ~sites and dist directly to the root of gh-pages without retaining subdirectories
+        # Copy contents from ~sites and dist into gh-pages root
         if [ -d "./~sites" ]; then
-        rsync -av --remove-source-files --exclude='*/' ./~sites/ ${{ github.workspace }}/gh-pages/
+          rsync -av ./~sites/ ${{ github.workspace }}/gh-pages/
         fi
         if [ -d "./dist" ]; then
-        rsync -av --remove-source-files --exclude='*/' ./dist/ ${{ github.workspace }}/gh-pages/
+          rsync -av ./dist/ ${{ github.workspace }}/gh-pages/
         fi
 
-    # Step 5: Initialize or Update gh-pages Branch
-    - name: Initialize or Update gh-pages Branch
+    # Step 5: Commit and Push Changes to gh-pages
+    - name: Commit and Push to gh-pages
       run: |
-        GHPAGES_PATH="${{ github.workspace }}/gh-pages"
-        
-        # Remove gh-pages directory if it exists to start clean
-        if [ -d "$GHPAGES_PATH" ]; then
-          rm -rf "$GHPAGES_PATH"
-        fi
-        
-        # Clone the gh-pages branch if it exists, or create it if not
-        git clone https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
-        cd "$GHPAGES_PATH"
-        
+        cd ${{ github.workspace }}/gh-pages
+
+        # Configure Git for this environment
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+        # Check out or initialize gh-pages
         if git rev-parse --verify origin/gh-pages; then
           git checkout gh-pages
           git pull origin gh-pages
@@ -76,38 +71,9 @@ jobs:
           git commit -m "Initialize gh-pages branch"
           git push --force origin gh-pages
         fi
-        
-        # Set Git user identity for commits in this environment
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-        
-        # Add or update the submodule for the demo if necessary
-        if [ ! -d "GCWeb" ]; then
-          git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
-        fi
-        
-        # Check if .gitmodules exists before attempting to add it
-        if [ -f .gitmodules ]; then
-          git add .gitmodules
-        fi
-        git add GCWeb
-        git commit -m "Update submodule GCWeb" --allow-empty
-        git pull --rebase origin gh-pages || true  # Sync with remote, ignore rebase errors
 
-    # Step 6: Configure Remote with GitHub Token for Authentication
-    - name: Configure Remote with GitHub Token
-      run: |
-        cd ${{ github.workspace }}/gh-pages
-        # Set the remote URL to use the GitHub token for authentication
-        git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/GCWeb.git
-
-    # Step 7: Force Push to gh-pages
-    - name: Force Push to gh-pages
-      run: |
-        cd ${{ github.workspace }}/gh-pages
-        # Repack the repository to avoid any potential issues with large or corrupt objects
-        git gc --prune=now
-        git repack -a -d --depth=250 --window=250
-        # Force push changes to gh-pages with authentication
+        # Stage and commit all changes to gh-pages
+        git add .
+        git commit -m "Update gh-pages with new demo files" --allow-empty
+        git pull --rebase origin gh-pages || true
         git push origin gh-pages --force
-
