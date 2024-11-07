@@ -36,14 +36,19 @@ jobs:
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
     
-    # Step 4: Copy built files to the gh-pages directory
-    - name: Copy Built Files to gh-pages
+    # Step 4: Copy built files to the root of the gh-pages directory
+    - name: Copy Built Files to gh-pages Root
       run: |
         # Ensure the gh-pages directory exists
         mkdir -p ${{ github.workspace }}/gh-pages
-        # Copy the built files to gh-pages
-        if [ -d "./~sites" ]; then rsync -av ./~sites/ ${{ github.workspace }}/gh-pages/; fi
-        if [ -d "./dist" ]; then rsync -av ./dist/* ${{ github.workspace }}/gh-pages/; fi
+        # Copy the contents directly to the root of gh-pages
+        if [ -d "./~sites" ]; then
+          rsync -av --delete ./~sites/ ${{ github.workspace }}/gh-pages/
+        fi
+        if [ -d "./dist" ]; then
+          rsync -av --delete ./dist/ ${{ github.workspace }}/gh-pages/
+        fi
+
 
     # Step 5: Initialize or Update gh-pages Branch
     - name: Initialize or Update gh-pages Branch
