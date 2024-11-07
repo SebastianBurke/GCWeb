@@ -16,7 +16,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        submodules: recursive  # This initializes and updates submodules automatically
+        submodules: recursive  # Initializes and updates submodules automatically
 
     # Step 2: Set up Node.js and Bower
     - name: Set up Node.js
@@ -45,106 +45,48 @@ jobs:
         if [ -d "./~sites" ]; then rsync -av ./~sites/ ${{ github.workspace }}/gh-pages/; fi
         if [ -d "./dist" ]; then rsync -av ./dist/* ${{ github.workspace }}/gh-pages/; fi
 
-    # Step 4.5: Verify gh-pages Directory Contents
-    - name: Verify gh-pages Directory Contents
-      run: ls -R ${{ github.workspace }}/gh-pages
-
-    # Step 5: Reinitialize gh-pages Branch Cleanly
-    - name: Reinitialize gh-pages Branch
+    # Step 5: Initialize or Update gh-pages Branch
+    - name: Initialize or Update gh-pages Branch
       run: |
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
         
-        # Remove gh-pages directory if it exists
+        # Remove gh-pages directory if it exists to start clean
         if [ -d "$GHPAGES_PATH" ]; then
-        rm -rf "$GHPAGES_PATH"
+          rm -rf "$GHPAGES_PATH"
         fi
         
-        # Reinitialize the gh-pages branch with a clean history
+        # Clone the gh-pages branch if it exists, or create it if not
         git clone https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
         cd "$GHPAGES_PATH"
-        git checkout --orphan gh-pages
-        git rm -rf .
-        touch .nojekyll
-        git add .nojekyll
-        git commit -m "Reinitialize gh-pages branch"
-        git push --force origin gh-pages
-
-    # Step 6: Ensure a Clean gh-pages Directory and Update Submodule
-    - name: Dist - Prepare gh-pages Directory
-      run: |
-        # Define the gh-pages path
-        GHPAGES_PATH="${{ github.workspace }}/gh-pages"
         
-        # Remove gh-pages directory if it exists to ensure a clean slate
-        if [ -d "$GHPAGES_PATH" ]; then
-            echo "Removing existing gh-pages directory..."
-            rm -rf "$GHPAGES_PATH"
-        fi
-
-        # Clone the gh-pages branch if it exists, or initialize it
-        if git ls-remote --exit-code --heads https://github.com/${{ github.repository_owner }}/GCWeb.git gh-pages; then
-            git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git --branch gh-pages "$GHPAGES_PATH"
+        if git rev-parse --verify origin/gh-pages; then
+          git checkout gh-pages
+          git pull origin gh-pages
         else
-            # Create an empty gh-pages branch if it doesn't exist
-            git clone --depth 1 https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
-            cd "$GHPAGES_PATH"
-            git checkout --orphan gh-pages
-            git rm -rf .
-            touch .nojekyll  # To prevent GitHub Pages from processing files as Jekyll
-            git commit --allow-empty -m "Initialize gh-pages branch"
-            git push origin gh-pages
-            cd ..
+          git checkout --orphan gh-pages
+          git rm -rf .
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Initialize gh-pages branch"
+          git push --force origin gh-pages
         fi
-
-        # Move into the gh-pages directory and update the submodule
-        cd "$GHPAGES_PATH"
-        git submodule update --init --recursive
-
-        # Set Git user identity for commits in this environment
+        
+        # Move into the gh-pages directory and configure user for commits
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-
-        # If the submodule doesn’t exist, add it
+        
+        # Add or update the submodule for the demo if necessary
         if [ ! -d "GCWeb" ]; then
-            git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
+          git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
         fi
-
-        # Fetch and reset submodule to the latest commit on the desired branch
-        cd GCWeb
-        git remote set-url origin https://github.com/ServiceCanada/wet-boew-demos.git
-        git fetch --depth 1 origin
-
-        # Try to reset to 'master' or fallback to 'gh-pages'
-        if git rev-parse --verify origin/master > /dev/null 2>&1; then
-            git reset --hard origin/master
-        elif git rev-parse --verify origin/gh-pages > /dev/null 2>&1; then
-            git reset --hard origin/gh-pages
-        else
-            echo "Neither 'master' nor 'gh-pages' branches found in the submodule repository."
-            exit 1
-        fi
-        cd ..
-
-        # Commit any changes and sync the latest gh-pages changes
+        
+        # Commit any changes in submodules
         git add .gitmodules GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
         git pull --rebase origin gh-pages || true  # Sync with remote, ignore rebase errors
 
-
-
-    # Step 7: Force Push to gh-pages Branch with Authentication
-    - name: Configure Remote with GitHub Token
+    # Step 6: Force Push to gh-pages Branch
+    - name: Force Push to gh-pages
       run: |
         cd ${{ github.workspace }}/gh-pages
-        # Set the remote URL to use the GitHub token for authentication
-        git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/GCWeb.git
-
-    # Step 8: Force Push to gh-pages
-    - name: Prepare for Force Push to gh-pages
-      run: |
-        cd ${{ github.workspace }}/gh-pages
-        # Repack the repository to avoid any potential issues with large or corrupt objects
-        git gc --prune=now
-        git repack -a -d --depth=250 --window=250
-        # Retry force push changes to gh-pages
         git push origin gh-pages --force
