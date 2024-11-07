@@ -32,7 +32,8 @@ jobs:
     - name: Build Demo Files (GCWeb)
       run: |
         grunt demo --branch=${{ github.ref_name }}
-        docker compose up -d
+        docker compose up
+
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
     
@@ -49,7 +50,6 @@ jobs:
         if [ -d "./dist" ]; then
         rsync -av --remove-source-files --exclude='*/' ./dist/ ${{ github.workspace }}/gh-pages/
         fi
-
 
     # Step 5: Initialize or Update gh-pages Branch
     - name: Initialize or Update gh-pages Branch
