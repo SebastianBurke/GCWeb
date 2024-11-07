@@ -71,7 +71,7 @@ jobs:
           git push --force origin gh-pages
         fi
         
-        # Move into the gh-pages directory and configure user for commits
+        # Set Git user identity for commits in this environment
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         
@@ -80,8 +80,11 @@ jobs:
           git submodule add -b master https://github.com/ServiceCanada/wet-boew-demos.git GCWeb
         fi
         
-        # Commit any changes in submodules
-        git add .gitmodules GCWeb
+        # Check if .gitmodules exists before attempting to add it
+        if [ -f .gitmodules ]; then
+          git add .gitmodules
+        fi
+        git add GCWeb
         git commit -m "Update submodule GCWeb" --allow-empty
         git pull --rebase origin gh-pages || true  # Sync with remote, ignore rebase errors
 
