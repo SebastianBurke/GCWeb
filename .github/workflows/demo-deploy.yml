@@ -88,8 +88,20 @@ jobs:
         git commit -m "Update submodule GCWeb" --allow-empty
         git pull --rebase origin gh-pages || true  # Sync with remote, ignore rebase errors
 
-    # Step 6: Force Push to gh-pages Branch
+    # Step 6: Configure Remote with GitHub Token for Authentication
+    - name: Configure Remote with GitHub Token
+      run: |
+        cd ${{ github.workspace }}/gh-pages
+        # Set the remote URL to use the GitHub token for authentication
+        git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/GCWeb.git
+
+    # Step 7: Force Push to gh-pages
     - name: Force Push to gh-pages
       run: |
         cd ${{ github.workspace }}/gh-pages
+        # Repack the repository to avoid any potential issues with large or corrupt objects
+        git gc --prune=now
+        git repack -a -d --depth=250 --window=250
+        # Force push changes to gh-pages with authentication
         git push origin gh-pages --force
+
