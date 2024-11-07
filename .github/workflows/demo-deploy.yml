@@ -33,12 +33,21 @@ jobs:
       run: |
         grunt demo --branch=${{ github.ref_name }}
         docker compose up -d
-        sleep 20
-        docker compose down
 
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
     
+
+    - name: List contents of ~sites
+      run: |
+        if [ -d "./~sites" ]; then
+          echo "Contents of ~sites directory:"
+          ls -R ./~sites
+        else
+          echo "~sites directory does not exist."
+        fi
+    
+
     # Step 4: Copy built files directly to the root of the gh-pages directory
     - name: Copy Built Files to gh-pages Root
       run: |
