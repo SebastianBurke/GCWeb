@@ -42,13 +42,14 @@ jobs:
         # Ensure the gh-pages directory exists
         mkdir -p ${{ github.workspace }}/gh-pages
         
-        # Copy the contents of ~sites and dist directly to the root of gh-pages
+        # Copy the contents of ~sites and dist directly to the root of gh-pages without retaining subdirectories
         if [ -d "./~sites" ]; then
-        find ./~sites -mindepth 1 -exec mv -t ${{ github.workspace }}/gh-pages {} +
+        rsync -av --remove-source-files --exclude='*/' ./~sites/ ${{ github.workspace }}/gh-pages/
         fi
         if [ -d "./dist" ]; then
-        find ./dist -mindepth 1 -exec mv -t ${{ github.workspace }}/gh-pages {} +
+        rsync -av --remove-source-files --exclude='*/' ./dist/ ${{ github.workspace }}/gh-pages/
         fi
+
 
     # Step 5: Initialize or Update gh-pages Branch
     - name: Initialize or Update gh-pages Branch
