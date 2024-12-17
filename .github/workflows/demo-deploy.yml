@@ -27,7 +27,16 @@ jobs:
     - name: Install Bower
       run: npm install -g bower
 
-    # Step 3: Install dependencies and build demo files
+    # Step 3A: Cache Node.js dependencies
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    # Step 3B: Install dependencies and build demo files
     - name: Install dependencies
       run: npm install --legacy-peer-deps
 
@@ -49,20 +58,20 @@ jobs:
       run: |
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
         if [ -d "$GHPAGES_PATH" ]; then
-        rm -rf "$GHPAGES_PATH"
+          rm -rf "$GHPAGES_PATH"
         fi
         git clone https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
         cd "$GHPAGES_PATH"
         if git rev-parse --verify origin/gh-pages; then
-        git checkout gh-pages
-        git pull origin gh-pages
+          git checkout gh-pages
+          git pull origin gh-pages
         else
-        git checkout --orphan gh-pages
-        git rm -rf .
-        touch .nojekyll
-        git add .nojekyll
-        git commit -m "Initialize gh-pages branch"
-        git push --force origin gh-pages
+          git checkout --orphan gh-pages
+          git rm -rf .
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Initialize gh-pages branch"
+          git push --force origin gh-pages
         fi
 
     # Step 5: Copy built files into the already cloned gh-pages folder
@@ -70,10 +79,10 @@ jobs:
       run: |
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
         if [ -d "./~sites" ]; then
-        rsync -av ./~sites/ "$GHPAGES_PATH/"
+          rsync -av ./~sites/ "$GHPAGES_PATH/"
         fi
         if [ -d "./dist" ]; then
-        rsync -av ./dist/ "$GHPAGES_PATH/"
+          rsync -av ./dist/ "$GHPAGES_PATH/"
         fi
 
     # Step 6: Commit and push
