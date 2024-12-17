@@ -1,0 +1,79 @@
+name: Demo Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - 'gcweb-pr*'
+      - demo-deploy
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository and initialize submodules
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    # Step 2: Set up Node.js and Bower
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - name: Install Bower
+      run: npm install -g bower
+
+    # Step 3: Install dependencies and build demo files
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+    - name: Build Demo Files (GCWeb)
+      run: |
+        grunt demo --branch=${{ github.ref_name }}
+        docker compose up
+
+    - name: Build Demo Files (WET-BOEW)
+      run: grunt dist
+    
+    # Step 4: Copy built files to gh-pages directory root
+    - name: Copy Built Files to gh-pages Root
+      run: |
+        mkdir -p ${{ github.workspace }}/gh-pages
+        
+        # Copy contents from ~sites and dist into gh-pages root
+        if [ -d "./~sites" ]; then
+          rsync -av ./~sites/ ${{ github.workspace }}/gh-pages/
+        fi
+        if [ -d "./dist" ]; then
+          rsync -av ./dist/ ${{ github.workspace }}/gh-pages/
+        fi
+
+    # Step 5: Commit and Push Changes to gh-pages
+    - name: Commit and Push to gh-pages
+      run: |
+        cd ${{ github.workspace }}/gh-pages
+
+        # Configure Git for this environment
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+        # Check out or initialize gh-pages
+        if git rev-parse --verify origin/gh-pages; then
+          git checkout gh-pages
+          git pull origin gh-pages
+        else
+          git checkout --orphan gh-pages
+          git rm -rf .
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Initialize gh-pages branch"
+          git push --force origin gh-pages
+        fi
+
+        # Stage and commit all changes to gh-pages
+        git add .
+        git commit -m "Update gh-pages with new demo files" --allow-empty
+        git pull --rebase origin gh-pages || true
+        git push origin gh-pages --force
