@@ -1,0 +1,119 @@
+name: Demo Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - 'gcweb-pr*'
+      - demo-deploy
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      # Step 2: Node & Bower
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Bower
+        run: npm install -g bower
+
+      # Step 3: Install dependencies & build
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Debug - List project files
+        run: ls -R
+
+      - name: Build Demo Files (GCWeb)
+        run: |
+          grunt demo --branch=${{ github.ref_name }}
+          docker compose up -d
+          docker compose down
+
+      - name: Build Demo Files (WET-BOEW)
+        run: grunt dist
+
+      # Step 4: Clone gh-pages
+      - name: Setup gh-pages
+        run: |
+          GHPAGES_PATH="${{ github.workspace }}/gh-pages"
+          if [ -d "$GHPAGES_PATH" ]; then
+            rm -rf "$GHPAGES_PATH"
+          fi
+          git clone https://github.com/${{ github.repository_owner }}/GCWeb.git "$GHPAGES_PATH"
+          cd "$GHPAGES_PATH"
+
+          if git rev-parse --verify origin/gh-pages; then
+            git checkout gh-pages
+            git pull origin gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf .
+            touch .nojekyll
+            git add .nojekyll
+            git commit -m "Initialize gh-pages branch"
+            git push --force origin gh-pages
+          fi
+
+      # Step 5: Copy built files into subfolder
+      #         named after the current branch (under "preview/").
+      - name: Copy Built Files to gh-pages Subfolder
+        run: |
+          GHPAGES_PATH="${{ github.workspace }}/gh-pages"
+          BRANCH_NAME="${{ github.ref_name }}"
+          PREVIEW_PATH="$GHPAGES_PATH/preview/$BRANCH_NAME"
+
+          # Make sure subfolders exist
+          mkdir -p "$PREVIEW_PATH/GCWeb"
+          mkdir -p "$PREVIEW_PATH/wet-boew"
+
+          # Copy GCWeb output (often in ./~sites) to /preview/<branch>/GCWeb
+          if [ -d "./~sites" ]; then
+            rsync -av --delete ./~sites/ "$PREVIEW_PATH/GCWeb/"
+          fi
+
+          # Copy WET-BOEW output (often in ./dist) to /preview/<branch>/wet-boew
+          if [ -d "./dist" ]; then
+            rsync -av --delete ./dist/ "$PREVIEW_PATH/wet-boew/"
+          fi
+
+      # Step 6: Commit and Push to gh-pages
+      - name: Commit and Push to gh-pages
+        run: |
+          cd ${{ github.workspace }}/gh-pages
+
+          # Configure Git for this environment
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          # Ensure remote uses the GitHub token (or your PAT)
+          git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/GCWeb.git
+
+          # Check out or initialize gh-pages
+          if git rev-parse --verify origin/gh-pages; then
+            git checkout gh-pages
+            git pull origin gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf .
+            touch .nojekyll
+            git add .nojekyll
+            git commit -m "Initialize gh-pages branch"
+            git push --force origin gh-pages
+          fi
+
+          # Stage & commit
+          git add .
+          git commit -m "Update gh-pages with new demo files" --allow-empty
+          git pull --rebase origin gh-pages || true
+          git push origin gh-pages --force
