@@ -1,7 +1,6 @@
 # Artifacts
 node_modules/
 lib/
-dist/
 ?sprite*.*css
 sprite*.png
 
@@ -63,4 +62,4 @@ _wetboew-demos/
 ~gcweb-dist/
 ~gcweb-cdn/
 ~gcweb-dist-submodule/
-~sites/
+
