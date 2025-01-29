@@ -86,7 +86,7 @@ jobs:
         git config user.email "actions@github.com"
 
         # Ensure remote uses the GitHub token
-        git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/GCWeb.git
+        git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/GCWeb.git
 
         # Check out or initialize gh-pages
         if git rev-parse --verify origin/gh-pages; then
