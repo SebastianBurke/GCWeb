@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository (including submodules if needed)
+    # Checkout the repository (including submodules if needed)
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    # Step 2: Set up Node.js and Bower
+    # Set up Node.js and Bower
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
@@ -27,13 +27,9 @@ jobs:
     - name: Install Bower
       run: npm install -g bower
 
-    # Step 3: Install dependencies and build demo files
+    # Install dependencies and build demo files
     - name: Install dependencies
       run: npm install --legacy-peer-deps
-
-    # Optional: Debug - List project files before build
-    - name: Debug - List project files
-      run: ls -R
 
     - name: Build Demo Files (GCWeb)
       run: |
@@ -44,7 +40,7 @@ jobs:
     - name: Build Demo Files (WET-BOEW)
       run: grunt dist
 
-    # Step 4: Clone or set up gh-pages first
+    # Clone or set up gh-pages first
     - name: Setup gh-pages
       run: |
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
@@ -65,7 +61,7 @@ jobs:
         git push --force origin gh-pages
         fi
 
-    # Step 5: Copy built files into the already cloned gh-pages folder
+    # Copy built files into the already cloned gh-pages folder
     - name: Copy Built Files to gh-pages Root
       run: |
         GHPAGES_PATH="${{ github.workspace }}/gh-pages"
@@ -76,7 +72,7 @@ jobs:
         rsync -av ./dist/ "$GHPAGES_PATH/"
         fi
 
-    # Step 6: Commit and Push to gh-pages
+    # Commit and Push to gh-pages
     - name: Commit and Push to gh-pages
       run: |
         cd ${{ github.workspace }}/gh-pages
