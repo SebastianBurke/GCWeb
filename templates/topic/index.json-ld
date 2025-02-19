@@ -41,22 +41,22 @@
 				"path": "topic-stackedheader-fr.html"
 			},
 			{
-				"title": "Theme/Topic page - Deprecated as of GCWeb v16.0.0",
+				"title": "Theme/Topic page - Demoted",
 				"language": "en",
-				"path": "deprecated/theme-topic-en.html"
+				"path": "demoted/theme-topic-en.html"
 			},
 			{
-				"title": "Page de sujet/thème - Obsolète à partir de GCWeb v16.0.0",
+				"title": "Page de sujet/thème - Rétrogradée",
 				"language": "fr",
-				"path": "deprecated/theme-topic-fr.html"
+				"path": "demoted/theme-topic-fr.html"
 			},
 			{
-				"title": "Lowest topic (with secondary navigation) - Deprecated as of GCWeb v16.0.0",
+				"title": "Lowest topic (with secondary navigation) - Deprecated",
 				"language": "en",
 				"path": "../lowest-topic/index-en.html"
 			},
 			{
-				"title": "Sujet de plus bas niveau (avec une navigation secondaire) - Obsolète à partir de GCWeb v16.0.0",
+				"title": "Sujet de plus bas niveau (avec une navigation secondaire) - Dépréciée",
 				"language": "fr",
 				"path": "../lowest-topic/index-fr.html"
 			}
@@ -71,18 +71,6 @@
 				"title": "Gabarit de page de sujet",
 				"language": "fr",
 				"path": "topic-doc-fr.html"
-			}
-		],
-		"reports": [
-			{
-				"title": "Accessibility assessment #1 - GC topic template",
-				"language": "en",
-				"path": "reports/a11y-1-en.html"
-			},
-			{
-				"title": "Évaluation d'accessibilité #1 - Gabarits de page de sujet GC",
-				"language": "fr",
-				"path": "reports/a11y-1-fr.html"
 			}
 		]
 	},
@@ -311,14 +299,14 @@
 			"example": {
 				"en": [
 					{
-						"href": "deprecated/theme-topic-en.html",
-						"text": "Theme - Topic page version 2 (beta) - Deprecated as of GCWeb v16.0.0"
+						"href": "demoted/theme-topic-en.html",
+						"text": "Theme - Topic page version 2 (beta)"
 					}
 				],
 				"fr": [
 					{
-						"href": "deprecated/theme-topic-fr.html",
-						"text": "Page the thème ou de sujet version 2 (bêta) - Obsolète à partir de GCWeb v16.0.0"
+						"href": "demoted/theme-topic-fr.html",
+						"text": "Page the thème ou de sujet version 2 (bêta)"
 					}
 				]
 			}
@@ -331,14 +319,14 @@
 			"example": {
 				"en": [
 					{
-						"href": "deprecated/topic-en.html",
-						"text": "Topic page version 1 - Deprecated as of GCWeb v16.0.0"
+						"href": "demoted/topic-en.html",
+						"text": "Topic page version 1"
 					}
 				],
 				"fr": [
 					{
 						"href": "deprecated/topic-fr.html",
-						"text": "Page de sujet version 1 - Obsolète à partir de GCWeb v16.0.0"
+						"text": "Page de sujet version 1"
 					}
 				]
 			}

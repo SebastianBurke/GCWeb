@@ -18,38 +18,26 @@
 	"componentName": "thematic",
 	"status": "provisional",
 	"pages": {
-		"docs": [
-			{
-				"title": "Pink Day - Deprecated as of GCWeb v16.0.0",
-				"language": "en",
-				"path": "../../méli-mélo/deprecated/pinkday/docs-en.html"
-			},
-			{
-				"title": "Journée rose - Obsolète à partir de GCWeb v16.0.0",
-				"language": "fr",
-				"path": "../../méli-mélo/deprecated/pinkday/docs-fr.html"
-			}
-		],
 		"examples": [
 			{
-				"title": "Pink Day - Deprecated as of GCWeb v16.0.0",
+				"title": "Pink Day",
 				"language": "en",
-				"path": "../../méli-mélo/deprecated/pinkday/pink-day-en.html"
+				"path": "pink-day-en.html"
 			},
 			{
-				"title": "Journée rose - Obsolète à partir de GCWeb v16.0.0",
+				"title": "Journée rose",
 				"language": "fr",
-				"path": "../../méli-mélo/deprecated/pinkday/pink-day-fr.html"
+				"path": "pink-day-fr.html"
 			},
 			{
-				"title": "Pink Day - Home - Deprecated as of GCWeb v16.0.0",
+				"title": "Pink Day - Home",
 				"language": "en",
-				"path": "../../méli-mélo/deprecated/pinkday/pink-day-home-en.html"
+				"path": "pink-day-home-en.html"
 			},
 			{
-				"title": "Journée rose - Accueil - Obsolète à partir de GCWeb v16.0.0",
+				"title": "Journée rose - Accueil",
 				"language": "fr",
-				"path": "../../méli-mélo/deprecated/pinkday/pink-day-home-fr.html"
+				"path": "pink-day-home-fr.html"
 			},
 			{
 				"title": "Dark theme",

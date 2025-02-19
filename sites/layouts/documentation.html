@@ -1,18 +1,221 @@
----
-layout: default
----
-{%- include variable-core.liquid -%}
-{%- assign lng = page.language -%}
-{%- if page.description -%}
-	<p property="description">{{ page.description }}</p>
-{%- endif -%}
+<!DOCTYPE html>
+<html class="no-js" lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW) wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+<title>Page untitled - Canada.ca</title>
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta name="description" content=" " />
+<meta name="author" content=" "/>
+<meta name="dcterms.title" content=""/>
+<meta name="dcterms.description" content=" "/>
+<meta name="dcterms.creator" content=" "/>
+<meta name="dcterms.language" content="fra"/>
+<meta name="dcterms.subject" content=""/>
+<meta name="dcterms.issued" content=""/>
+<meta name="dcterms.modified" content=""/>
 
-{{ content }}
+<link href="/dist/GCWeb/assets/favicon.ico" rel="icon" type="image/x-icon" />
+<link rel="stylesheet" href="/dist/GCWeb/css/theme.css" />
+<noscript><link rel="stylesheet" href="/dist/wet-boew/css/noscript.css" /></noscript>
+</head>
+<body vocab="http://schema.org/" typeof="WebPage"><nav>
+	<ul id="wb-tphp">
+		<li class="wb-slc"><a class="wb-sl" href="#wb-cont">Passer au contenu principal</a></li>
+		<li class="wb-slc visible-sm visible-md visible-lg"><a class="wb-sl" href="#wb-info">Passer à «&#160;À propos de ce site&#160;»</a></li></ul>
+</nav>
 
-<p>(<a href="{{ page.index_json }}" rel="alternate" type="application/json">{% if lng == "fr" %}Consultez cette documentation en format JSON{% else %}Consult this documentation in a data format noted in JSON{% endif %}</a>)</p>
+<header>
+	<div id="wb-bnr" class="container">
+		<div class="row">
+			
+			<div class="brand col-xs-9 col-sm-5 col-md-4" property="publisher" typeof="GovernmentOrganization">
+	<a href="https://wet-boew.github.io/GCWeb/" property="url">
+		<img src="/dist/GCWeb/assets/sig-blk-fr.svg" alt="Gouvernement du Canada" property="logo" /><span class="wb-inv"> / <span lang="en">Government of Canada</span></span>
+	</a>
+	<meta property="name" content="Gouvernement du Canada">
+	<meta property="areaServed" typeof="Country" content="Canada" />
+	<link property="logo" href="/dist/GCWeb/assets/wmms-blk.svg" />
+</div>
+
+			
+				
+<section id="wb-srch" class="col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-xs-12 col-sm-5 col-md-4">
+	<h2>Recherche</h2>
+	<form action="#" method="post" name="cse-search-box" role="search">
+		<div class="form-group wb-srch-qry">
+			<label for="wb-srch-q" class="wb-inv">Rechercher dans Canada.ca</label>
+			<input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search" value="" size="34" maxlength="170" placeholder="Rechercher dans Canada.ca" />
+			<datalist id="wb-srch-q-ac"></datalist>
+		</div>
+		<div class="form-group submit">
+			<button type="submit" id="wb-srch-sub" class="btn btn-primary btn-small" name="wb-srch-sub">
+				<span class="glyphicon-search glyphicon"></span>
+				<span class="wb-inv">Recherche</span>
+			</button>
+		</div>
+	</form>
+</section>
+
+			
+		</div>
+	</div>
+	
+	<hr>
+	<div class="container">
+		<div class="row"><div class="col-md-8">
+					<nav class="gcweb-menu" typeof="SiteNavigationElement">
+	<h2 class="wb-inv">Menu</h2>
+	<button type="button" aria-haspopup="true" aria-expanded="false">Menu<span class="wb-inv"> principal</span> <span class="expicon glyphicon glyphicon-chevron-down"></span></button>
+	<ul role="menu" aria-orientation="vertical" data-ajax-replace="https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-fr.html"><li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/emplois.html">Emplois et milieu de travail</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/immigration-citoyennete.html">Immigration et citoyenneté</a></li>
+		<li role="presentation"><a role="menuitem" href="https://voyage.gc.ca/">Voyage et tourisme</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/entreprises.html">Entreprises et industrie</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/prestations.html">Prestations</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/sante.html">Santé</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/impots.html">Impôts</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/environnement.html">Environnement et ressources naturelles</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/defense.html">Sécurité nationale et défense</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/culture.html">Culture, histoire et sport</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/police.html">Services de police, justice et urgences</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/transport.html">Transport et infrastructure</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.international.gc.ca/world-monde/index.aspx?lang=fra">Canada et le monde</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/finance.html">Argent et finances</a></li>
+		<li role="presentation"><a role="menuitem" href="https://www.canada.ca/fr/services/science.html">Science et innovation</a></li></ul>
+</nav>
+
+				</div></div>
+	</div>
+	
+	<nav id="wb-bc" property="breadcrumb">
+	<h2>Vous êtes ici :</h2>
+	<div class="container">
+		<ol class="breadcrumb" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="WebPage" href="https://www.canada.ca/fr.html">
+					<span property="name">Canada.ca</span>
+				</a>
+				<meta property="position" content="1">
+			</li>
+			
+							<li property="itemListElement" typeof="ListItem">
+								<a property="item" typeof="WebPage" href="/index-fr.html">
+									<span property="name">GCWeb</span>
+								</a>
+								<meta property="position" content="2">
+							</li>
+							
+		</ol>
+	</div>
+</nav>
+
+
+</header>
+
+<main class="container" property="mainContentOfPage" resource="#wb-main" typeof="WebPageElement"><h1 property="name" id="wb-cont"></h1>
+<main class="container" property="mainContentOfPage" resource="#wb-main" typeof="WebPageElement"><h1 property="name" id="wb-cont">Chat wizard</h1>
+<h2>Purpose</h2>
+<p>Transforms a simple form into a conversation like experience used as a wizard. The chat wizard has especially proven itself useful in emergency situations, as a crutch to help users better find the right information while strategies are being developed to improve content structure and/or on-page content in an effort to make proper information and access to support and/or benefits easily available to users in said situations, without the permanent necessity of a chat wizard. Therefore, the chat wizard is a convenient temporary solution to fill an informational/structural gap; COVID-19 was a good example.</p>
+
+<h2>Working example</h2>
+<ul>
+	<li><a href="chatwizard-en.html">English - default example</a></li>
+	<li><a href="chatwizard-json-en.html">English - JSON example</a></li>
+	<li><a href="chatwizard-fr.html" hreflang="fr">French - default example</a></li>
+	<li><a href="chatwizard-json-fr.html" hreflang="fr">French - JSON example</a></li>
+</ul>
+
+<h2>How to implement</h2>
+<p>There are two ways to implement the chat wizard. The more common way is to code a form, and add according classes and data attributes. The other way is to load it from a JSON file, which will generate both the form and the wizard, is useful in case one would want to implement the same chat wizard on multiple pages.</p>
+<h3>1. Code a form</h3>
+<ol>
+	<li>Code a form that has a decision tree logic, with the idea that an answer could affect what the next question would be. At the moment, all choices of answer to a question must be radio buttons only.</li>
+	<li>Wrap your form in a section, aside or div tag with a class named “.provisional.wb-chtwzrd”, along with the class “.hidden” to avoid the basic form to flicker on load. Other options are:
+		<ul>
+			<li>A data attribute named “data-wb-chtwzrd-avatar” can be added with a path to an image in order to change the default avatar in the bubble and the chat window. Recommended dimensions are 45x45 pixels.</li>
+			<li>A class named “.wb-chtwzrd-inline” can be added to have the chat experience inside the content and not in a separate window. This feature should only be used on a dedicated page, since it will start right away and steals the show to other content.</li>
+		</ul>
+	</li>
+	<li>Give it a title (outside of you form) as an H2. That heading will be the title of the form, as well as the title of the chat window and the text of the notification message.</li>
+	<li>The action of your form will be the default destination page at the end of the flow. The method will define if the form will be submitted through the URL bar or in the body at the end. You can give it a name attribute too, for tracking purposes.</li>
+	<li>You will need to start your form with a greetings paragraph. That paragraph must have a “.wb-chtwzrd-greetings” class and will be the first message coming from the bot when the chat window is opened.</li>
+	<li>Same thing for the last message at the end of the conversation which is a farewell paragraph that you can put at the bottom of your form and that needs to have the “.wb-chtwzrd-farewell” class.</li>
+	<li>If you add a regular paragraph right after your greetings one, this will be considered as an introduction message, which will be mentioned by the bot right after the greetings.</li>
+	<li>The submit button is necessary as it indicates what the final submit button will show at the end of the conversation. Plus, you can add a data attribute there named “data-wb-chtwzrd-replace” that allows you to give a different value to your chat wizard than what’s in the form. <strong>This data attribute can be used on almost every textual tag inside the “.provisional.wb-chtwzrd” container to indicate what the chat wizard should display different than what the form displays.</strong></li>
+	<li>In the form itself, each question must be wrapped around a fieldset tag, with a unique ID attribute. 10. The question has to be in a legend tag, to which for instance you can use the “data-wb-chtwzrd-replace” attribute to have a more conversation-based question for the wizard.</li>
+	<li>Choices of answer must be in an unordered list, with a class named “.list-unstyled” to not show the bullet points and a class “.mrgn-tp-md” for spacing at your own taste.</li>
+	<li>The label tag has to wrap your input of type radio, with the text value wrapped in a span tag.</li>
+	<li>The input itself has a name that represents that question in the final GET query string or POST, along with the value attribute for this input in particular. Also:
+		<ul>
+			<li>The data attribute named “data-wb-chtwzrd-next” must be used on the inputs to indicate the next question (fieldset ID) to present to the user. The last question of any possible conversation in the decision tree must have that data attribute set to “none”, in order to end the conversation.</li>
+			<li>The data attribute name “data-wb-chtwzrd-url” provides the plugin with the updated destination of the redirection at the final submit.</li>
+		</ul>
+	</li>
+	<li>If you want an external button to enable the chat wizard in addtition to the chat wizard bubble, you can add a button with the class named <code>.wb-chtwzrd-btn</code>.</li>
+	<li>If you only want external button to enable the chat wizard instead of chat bubble, simply add the class named <code>.wb-chtwzrd-btn-extrnl</code> on your chat wizard and the chat bubble will not be displayed.</li>
+</ol>
+<p>There you have it! A conversational-like experience driven by a fairly simple form.</p>
+<h3>2. Import a JSON File</h3>
+<p>Accepting JSON File as an input for batch deployments. If you have a JSON file that follows the Data API logic shown below, it can be implemented as a chat wizard instance.</p>
+<p>JSON File API</p>
+<pre><code>{
+	"header":{
+		"method": "GET (default) or POST [GET]",
+		"defaultDestination": "Default results page after submission [results-en.html]",
+		"avatar": "Custom avatar URL [https://www.canada.ca/etc/designs/canada/wet-boew/assets/default-avatar.png]",
+		"inline": "If provided with any value, it will put the chat wizard inside the content instead of a seperate window [true]",
+		"first": "ID attribute of first question (will pick the first question in the form if not set) [q1]",
+		"formType": "formType dynamic (default) or static for the basic form [dynamic]",
+		"name":"Name attribute on the form for tracking purposes. Chat's form has -chat appended automatically [example]",
+		"form": {
+			"title": "Title for basic form [Help us help you]",
+			"instructions": "Introduction paragraph before basic form [If you are an employer or organization looking for funding, you can find relevant information on the &lt;a href='pagex.html'&gt;funding page&lt;/a&gt;.]",
+			"sendButton": "Text for the submit button in the basic form [Search now]"
+		},
+		"title":"Title of wizard [I can help you find the information you need]",
+		"greetings":"Greetings message as first interaction with user [Hi! I can help direct you to programs and services you might be interested in. Let's begin...]",
+		"instructions": "More instructions or information before the questionnaire starts [First, if you are an employer or organization looking for funding, you can find relevant information on the &lt;a href='pagex.html'&gt;funding page&lt;/a&gt;.]",
+		"farewell":"Farewell message as last interaction after last question is answered [Thank you. I have built a page with results you may find resourceful.]",
+		"sendButton":"Text for the submit button after last question is answered [Show results]"
+	},
+	"questions":{
+		"q1":{
+			"name":"Name of the question [describe]",
+			"input":"Input type [radio]",
+			"labelForm":"Question in the form [What would you describe yourself as?]",
+			"label":"Question in the wizard [Are you:]",
+			"choices":[
+				{
+					"content":"Choice of answer for an input [a young Canadian]",
+					"value":"Value for the submission [young-canadian]",
+					"next":"Next question ID [q2]",
+					"url":"result page if this answer is selected [results-en.html]"
+				},
+				{
+					"...":"More choices"
+				}
+			]
+		},
+		"q2":{
+			"...":"More questions"
+		}
+	}
+}</code></pre>
+<p>All you need on your page is to add a data attribute named “data-wb-chtwzrd-src” to your section, aside or div tag that has the “.provisional.wb-chtwzrd” class, and provide it with the path to your JSON file.</p>
+
+<section class="pagedetails">
+	<h2 class="wb-inv">Page details</h2><dl id="wb-dtmd">
+	<dt>Date modified:</dt>
+	<dd><time property="dateModified">2023-03-07</time></dd>
+</dl>
+</section>
+
+</main>
+
+<p>(<a href="" rel="alternate" type="application/json">Consult this documentation in a data format noted in JSON</a>)</p>
 
 <div class="wb-disable-allow" data-wb-jsonmanager='{
-	"url": "{{ page.index_json }}",
+	"url": "",
 	"name": "api",
 	"patches": [
 		{
@@ -35,14 +238,7 @@ layout: default
 	]
 }'></div>
 
-<p class="lead">Version <strong class="wb-disable-allow" data-json-replace="#[api]/version">Unknown</strong></p>
-
-{%- if page.short_rationale_ajax_url -%}
-	<div class="wb-disable-allow" data-ajax-replace="{{ page.short_rationale_ajax_url }}"></div>
-{%- endif -%}
-
-
-<div class="wb-disable-allow" data-wb-json='{
+<p class="lead">Version <strong class="wb-disable-allow" data-json-replace="#[api]/version">Unknown</strong></p><div class="wb-disable-allow" data-wb-json='{
 	"url": "#[api]",
 	"streamline": true,
 	"mapping": [
@@ -57,33 +253,26 @@ layout: default
 }'>
 	<template data-type-container>
 		<section class="alert alert-info">
-			{% if lng == "fr" %}
-			<h2 class="h3">À propos de ce composant</h2>
-			<p>Ce composant n'est qu'un conteneur pour d'autres composants. Par conséquent, les mises à jour des composants inclus n'affectent pas l'API de ce composant.</p>
-			{% else %}
+			
 			<h2 class="h3">About this component</h2>
 			<p>This component is only a container for other components. Therefore, updates to included components do not affect this component's API.</p>
-			{% endif %}
+			
 		</section>
 	</template>
 	<template></template>
 </div>
 
 
-<h2>{% if lng == "fr" %}Sur cette page{% else %}On this page{% endif %}</h2>
+<h2>On this page</h2>
 <ul>
-	<li><a href="#inc-components">{% if lng == "fr" %}Composants inclus{% else %}Included components{% endif %}</a></li>
-	{%- if page.before_start_ajax_url -%}
-		<li><a href="#before-start">{% if lng == "fr" %}Avant de commencer{% else %}Before you start{% endif %}</a></li>
-	{%- endif -%}
-	<li><a href="#accessibility-guidance">{% if lng == "fr" %}Conseils en matière d'accessibilité{% else %}Accessibility guidance{% endif %}</a></li>
-	<li><a href="#variations">{% if lng == "fr" %}Variantes{% else %}Variations{% endif %}</a></li>
-	<li><a href="#eval-report">{% if lng == "fr" %}Évaluation et rapport{% else %}Evaluation and report{% endif %}</a></li>
-	<li><a href="#technical-docs">{% if lng == "fr" %}Documentation technique{% else %}Technical documentation{% endif %}</a></li>
+	<li><a href="#inc-components">Included components</a></li><li><a href="#accessibility-guidance">Accessibility guidance</a></li>
+	<li><a href="#variations">Variations</a></li>
+	<li><a href="#eval-report">Evaluation and report</a></li>
+	<li><a href="#technical-docs">Technical documentation</a></li>
 </ul>
 
 
-<h2 id="inc-components">{% if lng == "fr" %}Composants inclus{% else %}Included components{% endif %}</h2>
+<h2 id="inc-components">Included components</h2>
 
 <div class="wb-disable-allow" data-wb-json='{
 	"url": "#[api]",
@@ -95,11 +284,11 @@ layout: default
 				{
 					"template": "[data-yes]",
 					"test": "fn:isArray",
-					"value": "/dependencies/{{lng}}",
+					"value": "/dependencies/",
 					"mapping": [
 						{
 							"template": "template",
-							"assess": "/dependencies/{{lng}}",
+							"assess": "/dependencies/",
 							"mapping": [
 								{ "selector": "a", "value": "/title" },
 								{ "selector": "a", "value": "/url", "attr": "href" }
@@ -126,7 +315,7 @@ layout: default
 	]
 }'>
 	<template data-no>
-		<p>{% if lng == "fr" %}Ce composant n'a pas de dépendances{% else %}This component has no dependency{% endif %}.</p>
+		<p>This component has no dependency.</p>
 	</template>
 
 	<template data-yes>
@@ -136,24 +325,7 @@ layout: default
 			</template>
 		</ul>
 	</template>
-</div>
-
-
-{%- if page.before_start_ajax_url -%}
-	<h2 id="before-start">{% if lng == "fr" %}Avant de commencer{% else %}Before you start{% endif %}</h2>
-	<div class="wb-disable-allow" data-ajax-replace="{{ page.before_start_ajax_url }}"></div>
-{%- endif -%}
-
-
-<h2 id="accessibility-guidance">{% if lng == "fr" %}Conseils en matière d'accessibilité{% else %}Accessibility guidance{% endif %}</h2>
-
-{%- if lng == "fr" -%}
-<p>Liste des directives d'accessibilité à suivre pour garantir que le composant est utilisé dans le respect de la directive d'accessibilité et de la norme EN 301 549 (y compris WCAG 2.1 niveau AA).</p>
-{%- else -%}
-<p>List of accessibility guidances to be followed to ensure component is used in respect of the accessibility guideline and EN 301 549 standard (including WCAG 2.1 Level AA).</p>
-{%- endif -%}
-
-<div class="wb-disable-allow" data-wb-json='{
+</div><h2 id="accessibility-guidance">Accessibility guidance</h2><p>List of accessibility guidances to be followed to ensure component is used in respect of the accessibility guideline and EN 301 549 standard (including WCAG 2.1 Level AA).</p><div class="wb-disable-allow" data-wb-json='{
 	"url": "#[api]",
 	"streamline": "true",
 	"mapping": [
@@ -186,7 +358,7 @@ layout: default
 	]
 }'>
 	<template data-no>
-		<p>{% if lng == "fr" %}Il n’y a pas de directives d’accessibilité définies{% else %}There is no accessibility guidance defined{% endif %}</p>
+		<p>There is no accessibility guidance defined</p>
 	</template>
 
 	<template data-yes>
@@ -208,20 +380,12 @@ layout: default
 	}'></code></pre>
 </div>-->
 
-<h2 id="variations">{% if lng == "fr" %}Variantes{% else %}Variations{% endif %}</h2>
-
-{%- if lng == "fr" -%}
-<p>Voici quelques exemples populaires. Il ne s’agit pas d’une liste exhaustive des variantes possibles. Configurez votre page en fonction du type de page, des besoins des utilisateurs et des conseils du système de conception.</p>
-{%- else -%}
-<p>Here are some popular examples. This isn’t an exhaustive list of possible variations. Configure your page based on page type, user needs and design system guidance.</p>
-{%- endif -%}
-
-<div class="wb-disable-allow" data-wb-json='{
+<h2 id="variations">Variations</h2><p>Here are some popular examples. This isn’t an exhaustive list of possible variations. Configure your page based on page type, user needs and design system guidance.</p><div class="wb-disable-allow" data-wb-json='{
 	"url": "#[api]/variations",
 	"mapping": [
-		{ "selector": "[data-name]", "value": "/name/{{lng}}" },
-		{ "selector": "[data-description]", "value": "/description/{{lng}}", "isHTML": true  },
-		{ "selector": "[data-iteration]", "value": "/revisedFor/name/{{lng}}" },
+		{ "selector": "[data-name]", "value": "/name/" },
+		{ "selector": "[data-description]", "value": "/description/", "isHTML": true  },
+		{ "selector": "[data-iteration]", "value": "/revisedFor/name/" },
 
 		{
 			"template": "[data-guidance]",
@@ -233,7 +397,7 @@ layout: default
 					"selector": "p",
 					"value": "/guidance",
 					"mapping": [
-						{ "selector": "a", "value": "/{{lng}}", "attr": "href" }
+						{ "selector": "a", "value": "/", "attr": "href" }
 					]
 				}
 			]
@@ -289,8 +453,8 @@ layout: default
 					"selector": "ul",
 					"value": "/example",
 					"mapping": [
-						{ "selector": "a", "value": "/{{lng}}/href", "attr": "href" },
-						{ "selector": "a", "value": "/{{lng}}/text" }
+						{ "selector": "a", "value": "//href", "attr": "href" },
+						{ "selector": "a", "value": "//text" }
 					]
 				}
 			]
@@ -305,18 +469,18 @@ layout: default
 					"selector": "[data-implementation-tabs]",
 					"value": "/implementation",
 					"mapping": [
-						{ "selector": "summary", "value": "/name/{{lng}}" },
+						{ "selector": "summary", "value": "/name/" },
 						{ "selector": "[data-status]", "value": "/status" },
-						{ "selector": "[data-introduction]", "value": "/introduction/{{lng}}", "isHTML": true },
+						{ "selector": "[data-introduction]", "value": "/introduction/", "isHTML": true },
 
 						{
 							"template": "[data-example]",
 							"test": "fn:isArray",
-							"assess": "/example/{{lng}}",
+							"assess": "/example/",
 							"mapping": [
 								{
 									"selector": "ul",
-									"value": "/example/{{lng}}",
+									"value": "/example/",
 									"mapping": [
 										{ "selector": "a", "value": "/href", "attr": "href" },
 										{ "selector": "a", "value": "/text" }
@@ -328,11 +492,11 @@ layout: default
 						{
 							"template": "[data-instructions]",
 							"test": "fn:isArray",
-							"assess": "/instructions/{{lng}}",
+							"assess": "/instructions/",
 							"mapping": [
 								{
 									"selector": "ul",
-									"value": "/instructions/{{lng}}",
+									"value": "/instructions/",
 									"mapping": [
 										{ "selector": "li",	"value": "/", "isHTML": true }
 									]
@@ -343,11 +507,11 @@ layout: default
 						{
 							"template": "[data-ajax-source-code]",
 							"test": "fn:isLiteral",
-							"assess": "/ajaxSourceCode/{{lng}}",
+							"assess": "/ajaxSourceCode/",
 							"mapping": [
 								{
 									"selector": "code",
-									"value": "/ajaxSourceCode/{{lng}}",
+									"value": "/ajaxSourceCode/",
 									"attr": "data-ajax-append"
 								}
 							]
@@ -356,11 +520,11 @@ layout: default
 						{
 							"template": "[data-notes]",
 							"test": "fn:isArray",
-							"assess": "/notes/{{lng}}",
+							"assess": "/notes/",
 							"mapping": [
 								{
 									"selector": "ul",
-									"value": "/notes/{{lng}}",
+									"value": "/notes/",
 									"mapping": [
 										{ "selector": "li",	"value": "/", "isHTML": true }
 									]
@@ -373,7 +537,7 @@ layout: default
 							"mapping": [
 								{
 									"test": "fn:guessType",
-									"value": "/sample/{{lng}}",
+									"value": "/sample/",
 									"expect": "rdfs:Container",
 									"mapping": [
 										{
@@ -486,7 +650,7 @@ layout: default
 
 		{ "selector": "[data-history]", "value": "/history",
 			"mapping": [
-				{ "selector": "li", "value": "/{{lng}}", "isHTML": true }
+				{ "selector": "li", "value": "/", "isHTML": true }
 			]
 		}
 
@@ -498,38 +662,32 @@ layout: default
 		<h3>
 			<span data-name>[[ Name of the variation ]]</span>
 			<template data-status-stable>
-				<span class="label label-success mrgn-lft-sm"><span class="wb-inv">{%- if lng == "fr" -%}Statut{%- else -%}Status{%- endif -%}: </span>Stable</span>
+				<span class="label label-success mrgn-lft-sm"><span class="wb-inv">Status: </span>Stable</span>
 			</template>
 			<template data-status-tobereviewed>
-				<span class="label label-info mrgn-lft-sm"><span class="wb-inv">{%- if lng == "fr" -%}Statut{%- else -%}Status{%- endif -%}: </span>{%- if lng == "fr" -%}A vérifier{%- else -%}To be reviewed{%- endif -%}</span>
+				<span class="label label-info mrgn-lft-sm"><span class="wb-inv">Status: </span>To be reviewed</span>
 			</template>
 			<template data-status-provisional>
-				<span class="label label-warning mrgn-lft-sm"><span class="wb-inv">{%- if lng == "fr" -%}Statut{%- else -%}Status{%- endif -%}: </span>{%- if lng == "fr" -%}Provisoire{%- else -%}Provisional{%- endif -%}</span>
+				<span class="label label-warning mrgn-lft-sm"><span class="wb-inv">Status: </span>Provisional</span>
 			</template>
 			<template data-status-deprecated>
-				<span class="label label-default mrgn-lft-sm"><span class="wb-inv">{%- if lng == "fr" -%}Statut{%- else -%}Status{%- endif -%}: </span>{%- if lng == "fr" -%}Obsolète{%- else -%}Deprecated{%- endif -%}</span>
+				<span class="label label-default mrgn-lft-sm"><span class="wb-inv">Status: </span>Deprecated</span>
 			</template>
 			<template data-status-demoted>
-				<span class="label label-default mrgn-lft-sm"><span class="wb-inv">{%- if lng == "fr" -%}Statut{%- else -%}Status{%- endif -%}: </span>{%- if lng == "fr" -%}Rétrogradé{%- else -%}Demoted{%- endif -%}</span>
+				<span class="label label-default mrgn-lft-sm"><span class="wb-inv">Status: </span>Demoted</span>
 			</template>
 		</h3>
 
 		<p data-description>[[ Short description ]]</p>
 
-		<template data-guidance>
-			{%- if lng == "fr" -%}
-			<p>Consultez les <a href>guides de conception concernant cette variante</a>.</p>
-			{%- else -%}
-			<p>Consult the <a href>design guidance about this variation</a>.</p>
-			{%- endif -%}
-		</template>
+		<template data-guidance><p>Consult the <a href>design guidance about this variation</a>.</p></template>
 
 		<!--
 		<p>TODO: Screen capture</p>
 		<p>TODO: Working example link</p>
 		-->
 		<template data-variation-example>
-			<h4>{% if lng == "fr" %}Exemple(s) pratique(s){% else %}Working example(s){% endif %}</h4>
+			<h4>Working example(s)</h4>
 			<ul>
 				<template>
 					<li><a href></a></li>
@@ -538,7 +696,7 @@ layout: default
 		</template>
 
 		<template data-implementation>
-			<h4>{% if lng == "fr" %}Implémentation{% else %}Implementation{% endif %}</h4>
+			<h4>Implementation</h4>
 
 			<div class="wb-tabs" data-implementation-tabs>
 				<template>
@@ -567,7 +725,7 @@ layout: default
 
 							<template data-ajax-source-code>
 								<details>
-									<summary>{% if lng == "fr" %}Exemple de code{% else %}Code sample{% endif %}</summary>
+									<summary>Code sample</summary>
 									<pre><code data-wb-ajax='{ "encode": true }'></code></pre>
 								</details>
 							</template>
@@ -619,7 +777,7 @@ layout: default
 			</div>
 		</template>
 
-		<h4>{% if lng == "fr" %}Notes historiques{% else %}History notes{% endif %}</h4>
+		<h4>History notes</h4>
 		<ul data-history>
 			<template>
 				<li>[[ history ]]</li>
@@ -628,7 +786,7 @@ layout: default
 	</template>
 </div>
 
-<h2 id="eval-report">{% if lng == "fr" %}Évaluation et rapport{% else %}Evaluation and report{% endif %}</h2>
+<h2 id="eval-report">Evaluation and report</h2>
 
 <!-- Accessibility assessment -->
 <div class="wb-disable-allow" data-wb-json='{
@@ -665,21 +823,9 @@ layout: default
 		}
 	]
 }'>
-	<template data-no>
-		{%- if lng == "fr" -%}
-		<p>Il n’existe pas d'évaluation de l'accessibilité.</p>
-		{%- else -%}
-		<p>There is no accessibility assessment.</p>
-		{%- endif -%}
-	</template>
+	<template data-no><p>There is no accessibility assessment.</p></template>
 
-	<template data-yes>
-		{%- if lng == "fr" -%}
-		<p>Évaluation d'accessibilité&nbsp;:</p>
-		{%- else -%}
-		<p>Accessibility assessment:</p>
-		{%- endif -%}
-		<ul>
+	<template data-yes><p>Accessibility assessment:</p><ul>
 			<template>
 				<li><a href hreflang lang></a></li>
 			</template>
@@ -723,21 +869,9 @@ layout: default
 		}
 	]
 }'>
-	<template data-no>
-		{%- if lng == "fr" -%}
-		<p>Il n’existe pas de rapport de conformité en matière d’accessibilité.</p>
-		{%- else -%}
-		<p>There is no accessibility conformance report.</p>
-		{%- endif -%}
-	</template>
+	<template data-no><p>There is no accessibility conformance report.</p></template>
 
-	<template data-yes>
-		{%- if lng == "fr" -%}
-		<p>Rapport de conformité en matière d'accessibilité&nbsp;:</p>
-		{%- else -%}
-		<p>Accessibility conformance report:</p>
-		{%- endif -%}
-		<ul>
+	<template data-yes><p>Accessibility conformance report:</p><ul>
 			<template>
 				<li><a href hreflang lang></a></li>
 			</template>
@@ -745,20 +879,13 @@ layout: default
 	</template>
 </div>
 
-<h2 id="technical-docs">{% if lng == "fr" %}Documentation technique{% else %}Technical documentation{% endif %}</h2>
+<h2 id="technical-docs">Technical documentation</h2>
 
-<h3>{% if lng == "fr" %}Ensemble de changements{% else %}Change set{% endif %}</h3>
+<h3>Change set</h3>
 
 <!--
 <p>The description beside the public API item are defining the scope of how the public API item is applicable in the context of its "Change set". It should contains all the information about how we can measure a change when a subsequent iteration would be created. It can refer to an explicit example, or contains a code sample, or link to another documentation section where more details is provided. Optionally and when it provide more clarity, it can provide a description what is not in the versioning scope.</p>
--->
-{%- if lng == "fr" -%}
-<p>Sauf indication contraire, les <a href="https://wet-boew.github.io/wet-boew-documentation/decision/14.html">dimensions de l'API de gestion de versions publique</a> sont strictement limitées à ce qui est décrit ici. Tout ce qui est omis ou non identifié est hors de portée.</p>
-{%- else -%}
-<p>Unless specified, the <a href="https://wet-boew.github.io/wet-boew-documentation/decision/14.html">public versioning API dimensions</a> are strictly limited to what is described here. Anything that is omitted or not identified is out of scope.</p>
-{%- endif -%}
-
-<div class="wb-disable-allow" data-wb-json='{
+--><p>Unless specified, the <a href="https://wet-boew.github.io/wet-boew-documentation/decision/14.html">public versioning API dimensions</a> are strictly limited to what is described here. Anything that is omitted or not identified is out of scope.</p><div class="wb-disable-allow" data-wb-json='{
 	"url": "#[api]/changesets",
 	"mapping": [
 		{ "selector": "details > summary", "value": "/name" },
@@ -2040,7 +2167,7 @@ layout: default
 </div>
 
 
-<h3>{% if lng == "fr" %}Itérations{% else %}Iterations{% endif %}</h3>
+<h3>Iterations</h3>
 
 <div class="wb-disable-allow" data-wb-json='{
 	"url": "#[api]/iteration",
@@ -2136,11 +2263,11 @@ layout: default
 		{
 			"template": "[data-example]",
 			"test": "fn:isArray",
-			"assess": "/example/{{lng}}",
+			"assess": "/example/",
 			"mapping": [
 				{
 					"selector": "ul",
-					"value": "/example/{{lng}}",
+					"value": "/example/",
 					"mapping": [
 						{ "selector": "a", "value": "/href", "attr": "href" },
 						{ "selector": "a", "value": "/text" }
@@ -2230,3 +2357,68 @@ layout: default
 	</details>
 </template>
 </div>
+
+<section class="pagedetails">
+	<h2 class="wb-inv">Détails de la page</h2><dl id="wb-dtmd">
+	<dt>Date de modification&#160;:</dt>
+	<dd><time property="dateModified"></time></dd>
+</dl>
+</section>
+
+</main>
+<footer id="wb-info">
+	<h2 class="wb-inv">À propos de ce site</h2>
+
+
+	<div class="gc-main-footer">
+		<div class="container">
+			<nav>
+				<h3>Gouvernement du Canada</h3>
+				<ul class="list-col-xs-1 list-col-sm-2 list-col-md-3"><li><a href="https://www.canada.ca/fr/contact.html">Toutes les coordonnées</a></li>
+					<li><a href="https://www.canada.ca/fr/gouvernement/min.html">Ministères et organismes</a></li>
+					<li><a href="https://www.canada.ca/fr/gouvernement/systeme.html">À propos du gouvernement</a></li></ul>
+				<h4><span class="wb-inv">Thèmes et sujets</span></h4>
+				<ul class="list-unstyled colcount-sm-2 colcount-md-3"><li><a href="https://www.canada.ca/fr/services/emplois.html">Emplois</a></li>
+					<li><a href="https://www.canada.ca/fr/services/immigration-citoyennete.html">Immigration et citoyenneté</a></li>
+					<li><a href="https://voyage.gc.ca/">Voyage et tourisme</a></li>
+					<li><a href="https://www.canada.ca/fr/services/entreprises.html">Entreprises</a></li>
+					<li><a href="https://www.canada.ca/fr/services/prestations.html">Prestations</a></li>
+					<li><a href="https://www.canada.ca/fr/services/sante.html">Santé</a></li>
+					<li><a href="https://www.canada.ca/fr/services/impots.html">Impôts</a></li>
+					<li><a href="https://www.canada.ca/fr/services/environnement.html">Environnement et ressources naturelles</a></li>
+					<li><a href="https://www.canada.ca/fr/services/defense.html">Sécurité nationale et défense</a></li>
+					<li><a href="https://www.canada.ca/fr/services/culture.html">Culture, histoire et sport</a></li>
+					<li><a href="https://www.canada.ca/fr/services/police.html">Services de police, justice et urgences</a></li>
+					<li><a href="https://www.canada.ca/fr/services/transport.html">Transport et infrastructure</a></li>
+					<li><a href="https://www.international.gc.ca/world-monde/index.aspx?lang=fra">Le Canada et le monde</a></li>
+					<li><a href="https://www.canada.ca/fr/services/finance.html">Argent et finances</a></li>
+					<li><a href="https://www.canada.ca/fr/services/science.html">Science et innovation</a></li>
+					<li><a href="https://www.canada.ca/fr/services/autochtones.html">Autochtones</a></li>
+					<li><a href="https://www.canada.ca/fr/services/veterans-militaire.html">Vétérans et militaires</a></li>
+					<li><a href="https://www.canada.ca/fr/services/jeunesse.html">Jeunesse</a></li></ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="gc-sub-footer">
+		<div class="container d-flex align-items-center">
+			<nav>
+				<h3 class="wb-inv">Organisation du gouvernement du Canada</h3>
+				<ul>
+					<li><a href="https://www.canada.ca/fr/sociaux.html">Médias sociaux</a></li>
+					<li><a href="https://www.canada.ca/fr/mobile.html">Applications mobiles</a></li>
+					<li><a href="https://www.canada.ca/fr/gouvernement/a-propos.html">À propos de Canada.ca</a></li><li><a href="https://www.canada.ca/fr/transparence/avis.html">Avis</a></li>
+					<li><a href="https://www.canada.ca/fr/transparence/confidentialite.html">Confidentialité</a></li></ul>
+			</nav>
+			<div class="wtrmrk align-self-end">
+				<img src="/dist/GCWeb/assets/wmms-blk.svg" alt="Symbole du gouvernement du Canada" />
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha384-rY/jv8mMhqDabXSo+UCggqKtdmBfd3qC2/KvyTDNQ6PcUJXaxK1tMepoQda4g5vB" crossorigin="anonymous"></script>
+<script src="/dist/wet-boew/js/wet-boew.js"></script>
+<script src="/dist/GCWeb/js/theme.js"></script>
+</body>
+</html>
